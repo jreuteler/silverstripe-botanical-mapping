@@ -1,0 +1,25 @@
+{
+  "name": "jreuteler/silverstripe-botanical-mapping",
+  "description": "",
+  "type": "silverstripe-module",
+  "homepage": "https://github.com/jreuteler/silverstripe-botanical-mapping",
+  "keywords": [
+    "silverstripe",
+    "module"
+  ],
+  "license": "",
+  "authors": [
+    {
+      "name": "Jan Reuteler",
+      "email": "janreuteler@icloud.com"
+    }
+  ],
+  "require": {
+    "silverstripe/framework": "~3.1",
+    "silverstripe/cms": "~3.1",
+    "jreuteler/silverstripe-geolocation-field": "^1.0@alpha",
+    "tractorcow/silverstripe-autocomplete": "^3.4"
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}
