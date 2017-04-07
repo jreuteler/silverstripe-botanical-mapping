@@ -17,18 +17,17 @@ class TreeSpecies extends DataObject
         'ScientificName'
     );
 
-    private static $many_many = array(
-        'Surveys' => 'BotanicalSurvey',
+    private static $has_many = array(
+        'Specimens' => 'TreeSpecimen',
     );
-
-
+    
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
         return $fields;
     }
 
-    public function GetTitle()
+    public function getTitle()
     {
         return $this->CommonName . ' (' . ($this->ScientificName) . ')';
     }

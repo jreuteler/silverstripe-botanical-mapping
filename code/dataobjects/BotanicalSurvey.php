@@ -14,8 +14,12 @@ class BotanicalSurvey extends DataObject
         'Project' => 'BotanicalMappingProject',
     );
 
-    private static $many_many = array(
-        'Trees' => 'TreeSpecies',
+    private static $has_many = array(
+        'Specimens' => 'TreeSpecimen',
+    );
+
+    private static $summary_fields = array(
+        'Title',
     );
 
     public function getCMSFields()

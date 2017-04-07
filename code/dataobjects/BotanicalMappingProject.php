@@ -29,7 +29,6 @@ class BotanicalMappingProject extends DataObject
 
     public function onBeforeWrite()
     {
-        $this->Title = strtolower($this->Title);
         parent::onBeforeWrite();
     }
 
