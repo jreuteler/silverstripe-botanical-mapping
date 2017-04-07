@@ -16,4 +16,4 @@ Debug:
 Director:
   rules:
     'importTreeSpecies': 'ImportTreeSpeciesController'
-    'botanicalMappingProject/$ID/$Action': 'BotanicalMappingProjectController'
+    'project/$Action/$ID': 'BotanicalMappingProjectController'

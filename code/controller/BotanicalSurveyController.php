@@ -1,6 +1,6 @@
 <?php
 
-class BotanicalMappingProjectController extends Page_Controller
+class BotanicalSurveyController extends Page_Controller
 {
     private static $allowed_actions = array(
         'CreateProjectForm'
@@ -9,17 +9,15 @@ class BotanicalMappingProjectController extends Page_Controller
     public function init()
     {
         parent::init();
+
+        //Requirements::css();
+        //Requirements::javascript();
     }
 
     public function index(SS_HTTPRequest $request)
     {
-        $action = $request->allParams()['Action'];
-
-        $data = array(
-            'Action' => ucfirst($action)
-        );
-
-        return $this->customise($data)->renderWith(array('BotanicalMappingProject', 'Page'));
+        //        $action = $request->allParams()['Action'];
+        return $this->customise(array())->renderWith(array('BotanicalMappingProject', 'Page'));
     }
 
 
