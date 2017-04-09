@@ -12,7 +12,7 @@ class BotanicalMappingProject extends DataObject
     );
 
     private static $has_many = array(
-        'BotanicalSurveys' => 'BotanicalSurvey',
+        'Surveys' => 'BotanicalSurvey',
     );
 
     private static $summary_fields = array(
