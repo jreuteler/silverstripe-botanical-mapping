@@ -6,9 +6,6 @@ $SurveySearchForm
     <input id="track" type="checkbox"/>
 </label>
 
-<input value="show points" type="button" onClick="showPoints()"/>
-
-
 <div id="map" class="map"></div>
 
 <style>
