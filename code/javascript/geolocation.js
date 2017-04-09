@@ -54,9 +54,9 @@ geolocation.on('change:accuracyGeometry', function() {
 var positionFeature = new ol.Feature();
 positionFeature.setStyle(new ol.style.Style({
     image: new ol.style.Circle({
-        radius: 6,
+        radius: 3,
         fill: new ol.style.Fill({
-            color: '#3399CC'
+            color: '#f00'
         }),
         stroke: new ol.style.Stroke({
             color: '#fff',
