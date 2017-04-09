@@ -17,9 +17,9 @@ $SurveySearchForm
 
 
 <script>
-    var specimenPositions = [];
+    var surveySpecimens = [];
         <% loop $Surveys %>
-        specimenPositions[$ID] = $SpecimenPositionsJSON;
+        surveySpecimens[$ID] = $SpecimenPositionsJSON;
         <% end_loop %>
 
 
@@ -41,12 +41,12 @@ $SurveySearchForm
         }));
 
 
-        var len = specimenPositions.length;
+        var len = surveySpecimens.length;
         for (i = 0; i < len; i++) {
 
-            if (specimenPositions[i]) {
+            if (surveySpecimens[i]) {
 
-                var survey = specimenPositions[i];
+                var survey = surveySpecimens[i];
                 var speciesLen = survey.length;
                 for (s = 0; s < speciesLen; s++) {
 
