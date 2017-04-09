@@ -29,4 +29,23 @@ class BotanicalSurvey extends DataObject
     }
 
 
+    public function getSpecimenPositionsJSON()
+    {
+        $positions = array();
+
+        foreach($this->Specimens() as $specimen) {
+            $geoLocationArray = explode(',', $specimen->GeoLocation);
+            $positions[] = array(
+                'ID' => $specimen->ID,
+                'Title' => $specimen->getTitle(),
+                'GeoLocation' => $specimen->GeoLocation,
+                'Latitude' => @$geoLocationArray[0],
+                'Longitude' => @$geoLocationArray[1],
+                'Accuracy' => @$geoLocationArray[2]
+            );
+        }
+
+        return json_encode($positions);
+    }
+
 }
