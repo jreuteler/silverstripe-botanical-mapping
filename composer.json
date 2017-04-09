@@ -18,7 +18,9 @@
     "silverstripe/framework": "~3.1",
     "silverstripe/cms": "~3.1",
     "jreuteler/silverstripe-geolocation-field": "^1.0@alpha",
-    "tractorcow/silverstripe-autocomplete": "^3.4"
+    "jreuteler/silverstripe-db-log": "^1.0",
+    "tractorcow/silverstripe-autocomplete": "^3.4",
+    "silverstripe-australia/gridfieldextensions": "^1.4"
   },
   "prefer-stable": true,
   "minimum-stability": "dev"
