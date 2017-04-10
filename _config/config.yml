@@ -15,5 +15,5 @@ Debug:
 
 Director:
   rules:
-    'importTreeSpecies': 'ImportTreeSpeciesController'
-    'project/$Action/$ID': 'BotanicalMappingProjectController'
+    'import-tree-species': 'ImportTreeSpeciesController'
+    'botanical-frontend': 'BotanicalFrontendController'
