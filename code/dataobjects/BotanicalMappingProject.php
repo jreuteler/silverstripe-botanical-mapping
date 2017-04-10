@@ -22,15 +22,14 @@ class BotanicalMappingProject extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $conf = GridFieldConfig_RelationEditor::create();
+
+        $fields = FieldList::create(
+            TextField::create('Title', 'Project'),
+            new GridField('Surveys', 'Surveys', $this->Surveys(), $conf)
+        );
+
         return $fields;
     }
-
-
-    public function onBeforeWrite()
-    {
-        parent::onBeforeWrite();
-    }
-
 
 }

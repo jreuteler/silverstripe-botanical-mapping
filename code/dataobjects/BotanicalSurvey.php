@@ -24,16 +24,31 @@ class BotanicalSurvey extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $conf = GridFieldConfig_RelationEditor::create();
+
+        $fields = FieldList::create(
+            TextField::create('Title', 'Survey'),
+            new GridField('Specimens', 'Specimens', $this->Specimens(), $conf)
+        );
+
         return $fields;
     }
 
 
+    public function SpecimenCount()
+    {
+        if ($this->Specimens()) {
+            return $this->Specimens()->Count();
+        }
+
+        return 0;
+    }
+    
     public function getSpecimenPositionsJSON()
     {
         $positions = array();
 
-        foreach($this->Specimens() as $specimen) {
+        foreach ($this->Specimens() as $specimen) {
             $geoLocationArray = explode(',', $specimen->GeoLocation);
             $positions[] = array(
                 'ID' => $specimen->ID,
