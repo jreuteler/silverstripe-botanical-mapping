@@ -6,6 +6,7 @@ class BotanicalFrontendController extends Page_Controller
 
     private static $allowed_actions = array(
         'view',
+        'create',
         'edit',
         'delete',
         'save',
@@ -15,31 +16,64 @@ class BotanicalFrontendController extends Page_Controller
     );
 
     private static $url_handlers = array(
-        '$DataObject/$Action/$ID/$OtherID' => 'handleAction',
+        '$DataObjectName/$Action/$ID/$OtherID' => 'handleAction',
     );
+
+    protected $dataObject;
 
 
     public function handleAction($request, $action)
     {
+        $ID = (int)$request->param('ID');
+        $dataObjectName = $request->param('DataObjectName');
+
+        // TODO: add/check permissions
+
+        try {
+            if (!$ID || $action == 'create') {
+                $dataObject = $dataObjectName::create();
+            } else {
+                $dataObject = $dataObjectName::get()->byID($ID);
+            }
+
+            $this->dataObject = $dataObject;
+
+            return $this->$action($request);
+        } catch (Exception $e) {
+
+        }
     }
 
-    public function view()
+    public function view(SS_HTTPRequest $request)
+    {
+
+        if ($request->isAjax()) {
+            $data = array('JSON' => json_encode($this->dataObject));
+            return $this->customise($data)
+                ->renderWith('AjaxData');
+        }
+
+        $data = array(
+            'ClassName' => $this->dataObject->RecordClassName,
+            'Entry' => $this->dataObject,
+        );
+
+        return $this->customise($data)->renderWith(array($this->dataObject->RecordClassName, 'Page'));
+    }
+
+    public function edit(SS_HTTPRequest $request)
     {
     }
 
-    public function edit()
+    public function delete(SS_HTTPRequest $request)
     {
     }
 
-    public function delete()
+    public function save(SS_HTTPRequest $request)
     {
     }
 
-    public function save()
-    {
-    }
-
-    public function showlist()
+    public function showlist(SS_HTTPRequest $request)
     {
     }
 
@@ -50,7 +84,6 @@ class BotanicalFrontendController extends Page_Controller
 
     public function EditForm()
     {
-
         // placeholder
         $fields = array();
 
@@ -81,8 +114,6 @@ class BotanicalFrontendController extends Page_Controller
         }
 
         return Controller::join_links(Director::baseURL(), 'botanical-frontend');
-        //, 'model', strtolower($record->ClassName), $action, $record->ID);
-
     }
 
 
