@@ -25,7 +25,6 @@ class BotanicalSurvey extends DataObject
     public function getCMSFields()
     {
         $conf = GridFieldConfig_RelationEditor::create();
-
         $fields = FieldList::create(
             TextField::create('Title', 'Survey'),
             new GridField('Specimens', 'Specimens', $this->Specimens(), $conf)
@@ -43,7 +42,7 @@ class BotanicalSurvey extends DataObject
 
         return 0;
     }
-    
+
     public function getSpecimenPositionsJSON()
     {
         $positions = array();

@@ -23,7 +23,6 @@ class BotanicalMappingProject extends DataObject
     public function getCMSFields()
     {
         $conf = GridFieldConfig_RelationEditor::create();
-
         $fields = FieldList::create(
             TextField::create('Title', 'Project'),
             new GridField('Surveys', 'Surveys', $this->Surveys(), $conf)
