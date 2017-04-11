@@ -118,19 +118,22 @@ class BotanicalFrontendController extends Page_Controller
         $form = new Form($this, 'EditForm', $fields, $actions, $validator);
 
 
+        if ($this->dataObject->isInDb()) {
+            $form->Fields()->push(new HiddenField('ID', '', $this->dataObject->ID));
+        }
+
+        $form->loadDataFrom($this->dataObject);
+
         return $form;
     }
 
 
-    public function Link($action = '')
+    public function Link($action = NULL)
     {
-        $record = null;
-        $args = func_get_args();
-        if (count($args) == 2) {
-            $record = $args[1];
-        }
+        $request = Controller::curr()->getRequest();
+        $dataObjectName = $request->param('DataObjectName');
 
-        return Controller::join_links(Director::baseURL(), 'botanical-frontend');
+        return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName);
     }
 
 
