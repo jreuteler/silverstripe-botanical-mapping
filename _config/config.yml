@@ -16,4 +16,4 @@ Debug:
 Director:
   rules:
     'import-tree-species': 'ImportTreeSpeciesController'
-    'botanical-frontend': 'BotanicalFrontendController'
+    'botanical-frontend': 'BotanicalMappingFrontendController'
