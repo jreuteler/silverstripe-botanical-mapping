@@ -20,6 +20,13 @@ class BotanicalFrontendController extends Page_Controller
     );
 
     protected $dataObject;
+    protected $f; // JSONDataFormatter
+
+    public function init()
+    {
+        $this->f = new JSONDataFormatter();
+        parent::init();
+    }
 
 
     public function handleAction($request, $action)
@@ -46,9 +53,8 @@ class BotanicalFrontendController extends Page_Controller
 
     public function view(SS_HTTPRequest $request)
     {
-
         if ($request->isAjax()) {
-            $data = array('JSON' => json_encode($this->dataObject));
+            $data = array('JSON' => $this->f->convertDataObject($this->dataObject));
             return $this->customise($data)
                 ->renderWith('AjaxData');
         }
@@ -67,6 +73,14 @@ class BotanicalFrontendController extends Page_Controller
 
     public function delete(SS_HTTPRequest $request)
     {
+        $delete = $this->dataObject->delete();
+
+        if ($request->isAjax()) {
+            return $this->customise($this->f->convertDataObject($delete))
+                ->renderWith('AjaxData');
+        }
+
+        return $delete;
     }
 
     public function save(SS_HTTPRequest $request)
