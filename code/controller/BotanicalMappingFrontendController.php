@@ -15,7 +15,7 @@ class BotanicalMappingFrontendController extends Page_Controller
     );
 
     private static $url_handlers = array(
-        '$DataObjectName/$Action/$ID/$OtherID' => 'handleAction',
+        '$DataObjectName/$Action/$ID/$ForeignKeyFieldName' => 'handleAction',
     );
 
     public static $controllerPath = 'botanical-frontend';
@@ -47,7 +47,7 @@ class BotanicalMappingFrontendController extends Page_Controller
 
             return $this->$action($request);
         } catch (Exception $e) {
-
+            DBLogger::log($e, __METHOD__, SS_LOG_ERROR);
         }
     }
 
@@ -113,9 +113,14 @@ class BotanicalMappingFrontendController extends Page_Controller
     {
         $ID = $request->param('ID');
         $dataObjectName = $request->param('DataObjectName');
+        $foreignKeyFieldName = $request->param('ForeignKeyFieldName');
 
         $list = array();
-        if (!$ID) {
+
+        // when ParentField is set the given ID is assumed as value for that field
+        if ($foreignKeyFieldName) {
+            $list = $dataObjectName::get()->filter(array($foreignKeyFieldName => $ID));
+        } else if (!$ID) {
             $list = $dataObjectName::get();
         } else {
             $list[] = $this->dataObject;
