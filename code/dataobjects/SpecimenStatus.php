@@ -37,13 +37,6 @@ class SpecimenStatus extends DataObject
 
         $fields->removeByName('SpecimenID');
         $fields->insertBefore('Date', ReadonlyField::create('Species')->setValue($this->Specimen()->getTitle()));
-
-        $config = GridFieldConfig::create();
-        $config->addComponent(new GridFieldButtonRow('before'));
-        $config->addComponent(new GridFieldEditableColumns());
-        $config->addComponent(new GridFieldDeleteAction());
-        $config->addComponent(new GridFieldExternalLink());
-
         return $fields;
     }
 
