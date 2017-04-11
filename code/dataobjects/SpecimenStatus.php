@@ -47,6 +47,11 @@ class SpecimenStatus extends DataObject
         return $fields;
     }
 
+    public function getTitle()
+    {
+        return $this->Date;
+    }
+
     public function Link()
     {
         return $this->ID;

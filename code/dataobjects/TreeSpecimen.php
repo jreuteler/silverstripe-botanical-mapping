@@ -69,7 +69,13 @@ class TreeSpecimen extends DataObject
         return ' - ';
     }
 
-        public function Link()
+    // TODO: add additional information to distinguish between various tree of the same species
+    public function getTitle()
+    {
+        return $this->SpeciesTitle();
+    }
+
+    public function Link()
     {
         return $this->ID;
     }
