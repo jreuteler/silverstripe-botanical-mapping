@@ -6,7 +6,6 @@ class BotanicalFrontendController extends Page_Controller
 
     private static $allowed_actions = array(
         'view',
-        'create',
         'edit',
         'delete',
         'save',
@@ -38,7 +37,7 @@ class BotanicalFrontendController extends Page_Controller
         // TODO: add/check permissions
 
         try {
-            if (!$ID || $action == 'create') {
+            if (!$ID) {
                 $dataObject = $dataObjectName::create();
             } else {
                 $dataObject = $dataObjectName::get()->byID($ID);
@@ -144,7 +143,7 @@ class BotanicalFrontendController extends Page_Controller
     }
 
 
-    public function Link($action = NULL)
+    public function Link($action = null)
     {
         $request = Controller::curr()->getRequest();
         $dataObjectName = $request->param('DataObjectName');
