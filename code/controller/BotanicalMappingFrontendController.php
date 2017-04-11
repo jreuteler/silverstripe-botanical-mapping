@@ -115,15 +115,14 @@ class BotanicalMappingFrontendController extends Page_Controller
         $dataObjectName = $request->param('DataObjectName');
         $foreignKeyFieldName = $request->param('ForeignKeyFieldName');
 
-        $list = array();
-
+        $list = ArrayList::create();
         // when ParentField is set the given ID is assumed as value for that field
         if ($foreignKeyFieldName) {
             $list = $dataObjectName::get()->filter(array($foreignKeyFieldName => $ID));
         } else if (!$ID) {
             $list = $dataObjectName::get();
         } else {
-            $list[] = $this->dataObject;
+            $list->push($this->dataObject);
         }
 
         if ($request->isAjax()) {
@@ -132,8 +131,13 @@ class BotanicalMappingFrontendController extends Page_Controller
                 ->renderWith('AjaxData');
         }
 
-        // TODO:
-        // non-AJAX List view
+        $data = array(
+            'ControllerPath' => self::$controllerPath.'/'.$this->dataObject->RecordClassName.'/edit',
+            'Records' => $list,
+        );
+
+        return $this->customise($data)->renderWith(array($this->dataObject->RecordClassName.'List', 'Page'));
+
     }
 
     public function Form()
