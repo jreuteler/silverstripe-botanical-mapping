@@ -111,6 +111,24 @@ class BotanicalMappingFrontendController extends Page_Controller
 
     public function showlist(SS_HTTPRequest $request)
     {
+        $ID = $request->param('ID');
+        $dataObjectName = $request->param('DataObjectName');
+
+        $list = array();
+        if (!$ID) {
+            $list = $dataObjectName::get();
+        } else {
+            $list[] = $this->dataObject;
+        }
+
+        if ($request->isAjax()) {
+            $data = array('JSON' => $this->f->convertDataObjectSet($list));
+            return $this->customise($data)
+                ->renderWith('AjaxData');
+        }
+
+        // TODO:
+        // non-AJAX List view
     }
 
     public function Form()
