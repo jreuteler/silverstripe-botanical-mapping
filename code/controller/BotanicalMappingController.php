@@ -111,7 +111,7 @@ class BotanicalMappingController extends Page_Controller
                 'form' => $this->EditForm()->forTemplate()->raw()
             ));
         } else {
-            $this->redirect(self::$controllerPath . '/' . $this->dataObject->EditLink());
+            $this->redirect($this->dataObject->EditLink());
         }
 
 
