@@ -34,11 +34,26 @@ class BotanicalSurvey extends DataObject
     }
 
 
+    public function getBreadcrumbParent()
+    {
+        return $this->Project();
+    }
+
     public function Link()
     {
         return $this->ID;
+
     }
 
+    public function EditLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+    }
+
+    public function ShowListLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
+    }
 
     public function SpecimenCount()
     {

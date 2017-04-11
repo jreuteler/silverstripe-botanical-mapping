@@ -19,6 +19,8 @@ class BotanicalMappingProject extends DataObject
         'Title'
     );
 
+    public static $is_breadcrumb_root = true;
+
 
     public function getCMSFields()
     {
@@ -31,9 +33,25 @@ class BotanicalMappingProject extends DataObject
         return $fields;
     }
 
+    public function getBreadcrumbParent()
+    {
+        return false;
+    }
+
+
     public function Link()
     {
         return $this->ID;
+    }
+
+    public function EditLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+    }
+
+    public function ShowListLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
     }
 
 }

@@ -32,6 +32,16 @@ class TreeSpecies extends DataObject
         return $this->ID;
     }
 
+    public function EditLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+    }
+
+    public function ShowListLink()
+    {
+        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
+    }
+    
     public function getTitle()
     {
         return $this->CommonName . ' (' . ($this->ScientificName) . ')';
