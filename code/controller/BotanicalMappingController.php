@@ -187,10 +187,6 @@ class BotanicalMappingController extends Page_Controller
 
         while (!$inRoot) {
 
-            if (property_exists($currentDataObject, 'is_breadcrumb_root')) {
-                $inRoot = true;
-            }
-
             $breadcrump = array(
                 'Title' => $currentDataObject->Title,
                 'Link' => $currentDataObject->ShowListLink(),
@@ -199,7 +195,11 @@ class BotanicalMappingController extends Page_Controller
 
             $breadcrumpList->push(new ArrayData($breadcrump));
 
+
             $currentDataObject = $currentDataObject->getBreadcrumbParent();
+            if(!$currentDataObject) {
+                $inRoot = true;
+            }
         }
 
         return $breadcrumpList;

@@ -19,9 +19,6 @@ class BotanicalMappingProject extends DataObject
         'Title'
     );
 
-    public static $is_breadcrumb_root = true;
-
-
     public function getCMSFields()
     {
         $conf = GridFieldConfig_RelationEditor::create();
