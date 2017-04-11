@@ -74,7 +74,7 @@ class BotanicalMappingController extends Page_Controller
             return $this->Form()->forAjaxTemplate();
         } else {
             return $this->renderWith(array(
-                $this->dataObject->RecordClassName . '_edit', 'edit_breadcrumb', 'Page'
+                $this->dataObject->RecordClassName . '_edit', 'BreadCrumbEdit', 'Page'
             ));
         }
     }
@@ -111,7 +111,7 @@ class BotanicalMappingController extends Page_Controller
                 'form' => $this->EditForm()->forTemplate()->raw()
             ));
         } else {
-            $this->redirect(self::$controllerPath . '/' . $this->dataObject->RecordClassName . '/edit/' . $this->dataObject->ID);
+            $this->redirect(self::$controllerPath . '/' . $this->dataObject->EditLink());
         }
 
 
@@ -140,11 +140,11 @@ class BotanicalMappingController extends Page_Controller
         }
 
         $data = array(
-            'ControllerPath' => self::$controllerPath.'/'.$this->dataObject->RecordClassName.'/edit',
+            'ControllerPath' => self::$controllerPath . '/' . $this->dataObject->RecordClassName . '/edit',
             'Records' => $list,
         );
 
-        return $this->customise($data)->renderWith(array($this->dataObject->RecordClassName.'List', 'Page'));
+        return $this->customise($data)->renderWith(array($this->dataObject->RecordClassName . 'List', 'Page'));
 
     }
 
@@ -175,6 +175,34 @@ class BotanicalMappingController extends Page_Controller
         $form->loadDataFrom($this->dataObject);
 
         return $form;
+    }
+
+
+    public function Breadcrumb()
+    {
+
+        $breadcrumpList = ArrayList::create();
+        $inRoot = false;
+        $currentDataObject = $this->dataObject;
+
+        while (!$inRoot) {
+
+            if (property_exists($currentDataObject, 'is_breadcrumb_root')) {
+                $inRoot = true;
+            }
+
+            $breadcrump = array(
+                'Title' => $currentDataObject->Title,
+                'Link' => $currentDataObject->ShowListLink(),
+                'Class' => $currentDataObject->RecordClassName
+            );
+
+            $breadcrumpList->push(new ArrayData($breadcrump));
+
+            $currentDataObject = $currentDataObject->getBreadcrumbParent();
+        }
+
+        return $breadcrumpList;
     }
 
 
