@@ -17,7 +17,7 @@ class TreeSpecimen extends DataObject
     );
 
     private static $summary_fields = array(
-        'Species.Title',
+        'SpeciesTitle',
         'LastRecordedTotalHeight',
         'LastRecordedCrownHeight',
         'LastRecordedDiameter',
@@ -50,6 +50,7 @@ class TreeSpecimen extends DataObject
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $config->addComponent(new GridFieldEditableColumns());
+        $config->addComponent(new GridFieldAddNewInlineButton());
         $config->addComponent(new GridFieldDeleteAction());
         $config->addComponent(new GridFieldExternalLink());
 
@@ -59,7 +60,16 @@ class TreeSpecimen extends DataObject
         return $fields;
     }
 
-    public function Link()
+    public function SpeciesTitle()
+    {
+        if ($this->Species()) {
+            return $this->Species()->getTitle();
+        }
+
+        return ' - ';
+    }
+
+        public function Link()
     {
         return $this->ID;
     }

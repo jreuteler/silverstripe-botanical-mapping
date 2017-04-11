@@ -40,11 +40,15 @@ class BotanicalSurvey extends DataObject
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $config->addComponent(new GridFieldEditableColumns());
+        $config->addComponent(new GridFieldAddNewInlineButton());
         $config->addComponent(new GridFieldDeleteAction());
         $config->addComponent(new GridFieldExternalLink());
 
-        $gridField = GridField::create('Specimens', 'Specimens', $this->Specimens(), $config);
+
+        $fields->removeByName('SpecimensID');
+        $gridField = GridField::create('SpecimensID', 'Specimens', $this->Specimens(), $config);
         $fields->add($gridField);
+
 
         return $fields;
     }
