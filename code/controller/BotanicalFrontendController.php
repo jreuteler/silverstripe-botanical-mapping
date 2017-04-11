@@ -69,6 +69,13 @@ class BotanicalFrontendController extends Page_Controller
 
     public function edit(SS_HTTPRequest $request)
     {
+        if ($this->request->isAjax()) {
+            return $this->Form()->forAjaxTemplate();
+        } else {
+            return $this->renderWith(array(
+                $this->dataObject->RecordClassName . '_edit', 'FrontendRecord_edit', 'Page'
+            ));
+        }
     }
 
     public function delete(SS_HTTPRequest $request)
@@ -83,7 +90,7 @@ class BotanicalFrontendController extends Page_Controller
         return $delete;
     }
 
-    public function save(SS_HTTPRequest $request)
+    public function save($data, Form $form, SS_HTTPRequest $request)
     {
     }
 
@@ -98,8 +105,8 @@ class BotanicalFrontendController extends Page_Controller
 
     public function EditForm()
     {
-        // placeholder
-        $fields = array();
+        $object = $this->dataObject;
+        $fields = $object->getFrontEndFields();
 
         $actions = new FieldList(
             $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
@@ -110,10 +117,6 @@ class BotanicalFrontendController extends Page_Controller
 
         $form = new Form($this, 'EditForm', $fields, $actions, $validator);
 
-        if ($this->record) {
-            $form->Fields()->push(new HiddenField('ID', '', $this->record->ID));
-            $form->loadDataFrom($this->record);
-        }
 
         return $form;
     }
