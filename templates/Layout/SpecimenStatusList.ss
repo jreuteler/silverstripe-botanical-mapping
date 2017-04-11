@@ -1,8 +1,10 @@
 <h1> Specimen status </h1>
+<% include BreadCrumb %>
+
 <ul>
     <% loop $Records %>
         <li>
-            <a href="{$Top.ControllerPath}/{$Link}">
+            <a href="{$EditLink}">
                 $Specimen.Title
                 $Date
                 $TotalHeight
