@@ -33,6 +33,22 @@ class BotanicalSurvey extends DataObject
         return $fields;
     }
 
+    public function getFrontEndFields($params = NULL)
+    {
+        $fields = parent::getFrontEndFields($params);
+
+        $config = GridFieldConfig::create();
+        $config->addComponent(new GridFieldButtonRow('before'));
+        $config->addComponent(new GridFieldEditableColumns());
+        $config->addComponent(new GridFieldDeleteAction());
+        $config->addComponent(new GridFieldExternalLink());
+
+        $gridField = GridField::create('Specimens', 'Specimens', $this->Specimens(), $config);
+        $fields->add($gridField);
+
+        return $fields;
+    }
+
 
     public function getBreadcrumbParent()
     {
@@ -47,12 +63,22 @@ class BotanicalSurvey extends DataObject
 
     public function EditLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/edit/' . $this->ID;
     }
 
     public function ShowListLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
+    }
+
+    public function getExternalLink()
+    {
+        return $this->EditLink();
+    }
+
+    public function getExternalLinkText()
+    {
+        return 'Edit';
     }
 
     public function SpecimenCount()

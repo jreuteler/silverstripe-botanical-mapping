@@ -41,6 +41,24 @@ class TreeSpecimen extends DataObject
         return $fields;
     }
 
+    public function getFrontEndFields($params = NULL)
+    {
+        $fields = parent::getFrontEndFields($params);
+
+        $fields->replaceField("SpeciesID", DropdownField::create('SpeciesID', 'Species')->setSource(TreeSpecies::get()->map('ID', 'Title')));
+
+        $config = GridFieldConfig::create();
+        $config->addComponent(new GridFieldButtonRow('before'));
+        $config->addComponent(new GridFieldEditableColumns());
+        $config->addComponent(new GridFieldDeleteAction());
+        $config->addComponent(new GridFieldExternalLink());
+
+        $gridField = GridField::create('Statuses', 'Statuses', $this->Statuses(), $config);
+        $fields->add($gridField);
+
+        return $fields;
+    }
+
     public function Link()
     {
         return $this->ID;
@@ -48,12 +66,22 @@ class TreeSpecimen extends DataObject
 
     public function EditLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/edit/' . $this->ID;
     }
 
     public function ShowListLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
+    }
+
+    public function getExternalLink()
+    {
+        return $this->EditLink();
+    }
+
+    public function getExternalLinkText()
+    {
+        return 'Edit';
     }
 
     public function getBreadcrumbParent()

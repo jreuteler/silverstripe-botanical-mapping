@@ -20,11 +20,17 @@ class TreeSpecies extends DataObject
     private static $has_many = array(
         'Specimens' => 'TreeSpecimen',
     );
-    
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
         return $fields;
+    }
+
+
+    public function getTitle()
+    {
+        return $this->CommonName . ' (' . ($this->ScientificName) . ')';
     }
 
     public function Link()
@@ -34,19 +40,23 @@ class TreeSpecies extends DataObject
 
     public function EditLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/edit/'.$this->ID;
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/edit/' . $this->ID;
     }
 
     public function ShowListLink()
     {
-        return BotanicalMappingController::$controllerPath.'/'.$this->RecordClassName . '/showlist';
-    }
-    
-    public function getTitle()
-    {
-        return $this->CommonName . ' (' . ($this->ScientificName) . ')';
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
 
+    public function getExternalLink()
+    {
+        return $this->EditLink();
+    }
+
+    public function getExternalLinkText()
+    {
+        return 'Edit';
+    }
 
     public function onBeforeWrite()
     {
