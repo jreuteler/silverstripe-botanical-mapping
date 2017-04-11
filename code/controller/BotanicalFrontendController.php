@@ -19,6 +19,7 @@ class BotanicalFrontendController extends Page_Controller
         '$DataObjectName/$Action/$ID/$OtherID' => 'handleAction',
     );
 
+    public static $controllerPath = 'botanical-frontend';
     protected $dataObject;
     protected $f; // JSONDataFormatter
 
@@ -92,6 +93,21 @@ class BotanicalFrontendController extends Page_Controller
 
     public function save($data, Form $form, SS_HTTPRequest $request)
     {
+        if (isset($data['ID'])) {
+            $this->dataObject->ID = $data['ID'];
+        }
+
+        $form->saveInto($this->dataObject);
+        $this->dataObject->write();
+
+        if ($this->request->isAjax()) {
+
+            // TODO: ajax response
+        } else {
+            $this->redirect(self::$controllerPath . '/' . $this->dataObject->RecordClassName . '/edit/' . $this->dataObject->ID);
+        }
+
+
     }
 
     public function showlist(SS_HTTPRequest $request)
@@ -132,8 +148,13 @@ class BotanicalFrontendController extends Page_Controller
     {
         $request = Controller::curr()->getRequest();
         $dataObjectName = $request->param('DataObjectName');
+        $ID = $request->param('ID');
 
-        return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName);
+        if ($action) {
+            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName, $action);
+        } else {
+            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName);
+        }
     }
 
 
