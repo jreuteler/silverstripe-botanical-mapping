@@ -37,6 +37,7 @@ class BotanicalSurvey extends DataObject
     {
         $fields = parent::getFrontEndFields($params);
 
+        $fields->add(LabelField::create('Specimens')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $config->addComponent(new GridFieldEditableColumns());

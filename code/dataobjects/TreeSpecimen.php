@@ -47,6 +47,7 @@ class TreeSpecimen extends DataObject
 
         $fields->replaceField("SpeciesID", DropdownField::create('SpeciesID', 'Species')->setSource(TreeSpecies::get()->map('ID', 'Title')));
 
+        $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $config->addComponent(new GridFieldEditableColumns());

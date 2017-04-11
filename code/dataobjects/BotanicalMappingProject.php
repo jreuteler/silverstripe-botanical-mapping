@@ -35,6 +35,7 @@ class BotanicalMappingProject extends DataObject
 
         $fields = parent::getFrontEndFields($params);
 
+        $fields->add(LabelField::create('Surveys')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $config->addComponent(new GridFieldEditableColumns());
