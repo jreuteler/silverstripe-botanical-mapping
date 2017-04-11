@@ -1,7 +1,7 @@
 <?php
 
 
-class BotanicalMappingFrontendController extends Page_Controller
+class BotanicalMappingController extends Page_Controller
 {
 
     private static $allowed_actions = array(
@@ -37,6 +37,7 @@ class BotanicalMappingFrontendController extends Page_Controller
         // TODO: add/check permissions
 
         try {
+            // TODO: check for wrong/non-existing IDS
             if (!$ID) {
                 $dataObject = $dataObjectName::create();
             } else {
@@ -73,7 +74,7 @@ class BotanicalMappingFrontendController extends Page_Controller
             return $this->Form()->forAjaxTemplate();
         } else {
             return $this->renderWith(array(
-                $this->dataObject->RecordClassName . '_edit', 'FrontendRecord_edit', 'Page'
+                $this->dataObject->RecordClassName . '_edit', 'edit_breadcrumb', 'Page'
             ));
         }
     }
@@ -101,7 +102,14 @@ class BotanicalMappingFrontendController extends Page_Controller
 
         if ($this->request->isAjax()) {
 
-            // TODO: ajax response
+            // TODO: Test
+            $this->response->addHeader('Content-type', 'application/json');
+            return json_encode(array(
+                'message' => 'success',
+                'class' => $this->dataObject->RecordClassName,
+                'id' => $this->dataObject->ID,
+                'form' => $this->EditForm()->forTemplate()->raw()
+            ));
         } else {
             $this->redirect(self::$controllerPath . '/' . $this->dataObject->RecordClassName . '/edit/' . $this->dataObject->ID);
         }
@@ -174,7 +182,6 @@ class BotanicalMappingFrontendController extends Page_Controller
     {
         $request = Controller::curr()->getRequest();
         $dataObjectName = $request->param('DataObjectName');
-        $ID = $request->param('ID');
 
         if ($action) {
             return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName, $action);
