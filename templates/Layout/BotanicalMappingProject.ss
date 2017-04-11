@@ -1,7 +1,5 @@
 <% with $Entry %>
-<a href="project/edit/$Link">
-    <li>
+    <a href="$Link">
         $Title
-    </li>
-</a>
-<% end_with %>>
+    </a>
+<% end_with %>
