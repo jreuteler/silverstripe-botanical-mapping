@@ -1,9 +1,9 @@
-<h1> Mapping projects </h1>
+<h1> Tree specimen </h1>
 <ul>
     <% loop $Records %>
         <li>
             <a href="{$Top.ControllerPath}/{$Link}">
-                $Title
+                $Species.Title
             </a>
         </li>
     <% end_loop %>

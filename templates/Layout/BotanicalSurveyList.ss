@@ -1,4 +1,4 @@
-<h1> Mapping projects </h1>
+<h1> Mapping survey </h1>
 <ul>
     <% loop $Records %>
         <li>
