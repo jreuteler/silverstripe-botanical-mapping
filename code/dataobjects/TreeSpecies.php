@@ -27,6 +27,11 @@ class TreeSpecies extends DataObject
         return $fields;
     }
 
+    public function Link()
+    {
+        return $this->ID;
+    }
+
     public function getTitle()
     {
         return $this->CommonName . ' (' . ($this->ScientificName) . ')';

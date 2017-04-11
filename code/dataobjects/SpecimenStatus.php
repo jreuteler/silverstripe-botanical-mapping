@@ -31,4 +31,9 @@ class SpecimenStatus extends DataObject
         return $fields;
     }
 
+    public function Link()
+    {
+        return $this->ID;
+    }
+
 }

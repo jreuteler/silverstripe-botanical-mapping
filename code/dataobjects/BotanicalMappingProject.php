@@ -16,7 +16,7 @@ class BotanicalMappingProject extends DataObject
     );
 
     private static $summary_fields = array(
-        'Title',
+        'Title'
     );
 
 
@@ -29,6 +29,11 @@ class BotanicalMappingProject extends DataObject
         );
 
         return $fields;
+    }
+
+    public function Link()
+    {
+        return $this->ID;
     }
 
 }

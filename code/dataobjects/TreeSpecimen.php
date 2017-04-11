@@ -41,6 +41,11 @@ class TreeSpecimen extends DataObject
         return $fields;
     }
 
+    public function Link()
+    {
+        return $this->ID;
+    }
+
 
     public function LastRecordedTotalHeight()
     {

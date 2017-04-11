@@ -34,6 +34,12 @@ class BotanicalSurvey extends DataObject
     }
 
 
+    public function Link()
+    {
+        return $this->ID;
+    }
+
+
     public function SpecimenCount()
     {
         if ($this->Specimens()) {
