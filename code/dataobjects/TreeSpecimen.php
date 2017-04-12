@@ -81,10 +81,9 @@ class TreeSpecimen extends DataObject
         return ' - ';
     }
 
-    // TODO: add additional information to distinguish between various tree of the same species
     public function getTitle()
     {
-        return $this->SpeciesTitle();
+        return ($this->Key ? $this->Key .' - ' : '').$this->SpeciesTitle();
     }
 
     public function Link()
