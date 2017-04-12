@@ -43,7 +43,7 @@ class BotanicalMappingProject extends DataObject
         $config->addComponent(new GridFieldEditableColumns());
 
         $config->addComponent(new GridFieldAddNewInlineButton());
-        $config->addComponent(new GridFieldExternalLink());
+        $config->addComponent(new GridFieldCustomEditButton());
 
         $gridField = GridField::create('Surveys', 'Surveys', $this->Surveys(), $config);
         $fields->add($gridField);
