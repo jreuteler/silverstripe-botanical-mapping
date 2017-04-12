@@ -3,6 +3,7 @@
 class TreeSpecimen extends DataObject
 {
     public static $db = array(
+        'Key' => 'Varchar',
         'GeoLocation' => 'SS_GeoLocation',
         'Comment' => 'Text',
     );
@@ -17,16 +18,19 @@ class TreeSpecimen extends DataObject
     );
 
     private static $summary_fields = array(
+        'Key',
         'SpeciesTitle',
         'LastRecordedTotalHeight',
         'LastRecordedCrownHeight',
         'LastRecordedDiameter',
-        'Comment',
         'GeoLocation'
     );
 
-    public static $allow_frontend_access = true;
+    private static $indexes = array(
+        'uniqueConstraint' => 'unique("Key", "SurveyID")'
+    );
 
+    public static $allow_frontend_access = true;
 
     public function getCMSFields()
     {
@@ -48,10 +52,12 @@ class TreeSpecimen extends DataObject
     public function getFrontEndFields($params = NULL)
     {
         $fields = parent::getFrontEndFields($params);
+        $fields->removeByName('SurveyID');
+        $fields->removeByName('SpeciesID');
 
         $autocomplete = AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
         $autocomplete->setSuggestURL(BotanicalSuggestController::$controllerPath . '/TreeSpecies/ScientificName,CommonName');
-        $fields->replaceField('SpeciesID', $autocomplete);
+        $fields->insertBefore('GeoLocation', $autocomplete);
 
         $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
