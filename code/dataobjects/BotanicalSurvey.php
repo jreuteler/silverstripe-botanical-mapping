@@ -71,21 +71,16 @@ class BotanicalSurvey extends DataObject
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/edit/' . $this->ID;
     }
 
+    public function DeleteLink()
+    {
+        return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/delete/' . $this->ID;
+    }
+
     public function ShowListLink()
     {
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
-
-    public function getExternalLink()
-    {
-        return $this->EditLink();
-    }
-
-    public function getExternalLinkText()
-    {
-        return 'Edit';
-    }
-
+    
     public function SpecimenCount()
     {
         if ($this->Specimens()) {

@@ -66,17 +66,6 @@ class BotanicalMappingProject extends DataObject
     {
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
-
-    public function getExternalLink()
-    {
-        return $this->EditLink();
-    }
-
-    public function getExternalLinkText()
-    {
-        return 'Edit';
-    }
-
     public function getBreadcrumbParent()
     {
         return false;
