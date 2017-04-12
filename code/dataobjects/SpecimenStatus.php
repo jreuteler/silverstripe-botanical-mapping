@@ -27,7 +27,15 @@ class SpecimenStatus extends DataObject
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+        $datefield = DateField::create('Date')
+            ->setConfig('showcalendar', true)
+            ->setConfig('dateformat', 'dd-MM-yyyy');
+
+        $fields->replaceField('Date', $datefield);
         $fields->removeByName('SpecimenID');
+
+
 
         return $fields;
     }
@@ -37,6 +45,11 @@ class SpecimenStatus extends DataObject
         $fields = parent::getFrontEndFields($params);
 
         $fields->removeByName('SpecimenID');
+        $datefield = DateField::create('Date')
+            ->setConfig('showcalendar', true)
+            ->setConfig('dateformat', 'dd-MM-yyyy');
+
+        $fields->replaceField('Date', $datefield);
         $fields->insertBefore('Date', ReadonlyField::create('Species')->setValue($this->Specimen()->getTitle()));
         return $fields;
     }
