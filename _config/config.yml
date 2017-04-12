@@ -17,3 +17,4 @@ Director:
   rules:
     'import-tree-species': 'ImportTreeSpeciesController'
     'botanical-frontend': 'BotanicalMappingController'
+    'botanical-suggest': 'BotanicalSuggestController'
