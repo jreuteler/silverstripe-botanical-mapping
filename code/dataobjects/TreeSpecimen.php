@@ -34,7 +34,9 @@ class TreeSpecimen extends DataObject
         $fields->removeByName('SurveyID');
         $fields->replaceField('GeoLocation', GeoLocationField::create('GeoLocation'));
         $fields->removeByName('SpeciesID');
-        $fields->insertBefore('GeoLocation', AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName')));
+
+        $autocomplete = AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
+        $fields->insertBefore('GeoLocation', $autocomplete);
 
         $conf = GridFieldConfig_RelationEditor::create();
         $fields->insertAfter('Comment', new GridField('SpecimenStatus', 'SpecimenStatus', $this->Statuses(), $conf));
@@ -47,7 +49,9 @@ class TreeSpecimen extends DataObject
     {
         $fields = parent::getFrontEndFields($params);
 
-        $fields->replaceField("SpeciesID", DropdownField::create('SpeciesID', 'Species')->setSource(TreeSpecies::get()->map('ID', 'Title')));
+        $autocomplete = AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
+        $autocomplete->setSuggestURL(BotanicalSuggestController::$controllerPath . '/TreeSpecies/ScientificName,CommonName');
+        $fields->replaceField('SpeciesID', $autocomplete);
 
         $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
