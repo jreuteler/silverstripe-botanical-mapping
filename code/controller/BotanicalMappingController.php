@@ -34,6 +34,11 @@ class BotanicalMappingController extends Page_Controller
         $ID = (int)$request->param('ID');
         $dataObjectName = $request->param('DataObjectName');
 
+        // redirect when no parameters given
+        if(!$dataObjectName) {
+            return $this->redirect(self::$controllerPath.'/BotanicalMappingProject/showlist');
+        }
+
         // TODO: add/check permissions
 
         try {
