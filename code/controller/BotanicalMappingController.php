@@ -195,7 +195,7 @@ class BotanicalMappingController extends Page_Controller
 
             $breadcrump = array(
                 'Title' => $currentDataObject->Title,
-                'Link' => $currentDataObject->ShowListLink(),
+                'Link' => $currentDataObject->EditLink(),
                 'Class' => $currentDataObject->RecordClassName
             );
 
