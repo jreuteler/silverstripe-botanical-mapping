@@ -22,6 +22,7 @@ class SpecimenStatus extends DataObject
         'Comment',
     );
 
+    public static $allow_frontend_access = true;
 
     public function getCMSFields()
     {

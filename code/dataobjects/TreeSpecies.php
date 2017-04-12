@@ -21,6 +21,8 @@ class TreeSpecies extends DataObject
         'Specimens' => 'TreeSpecimen',
     );
 
+    public static $allow_frontend_access = true;
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();

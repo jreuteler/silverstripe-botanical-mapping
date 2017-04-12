@@ -22,6 +22,8 @@ class BotanicalSurvey extends DataObject
         'Title',
     );
 
+    public static $allow_frontend_access = true;
+    
     public function getCMSFields()
     {
         $conf = GridFieldConfig_RelationEditor::create();
