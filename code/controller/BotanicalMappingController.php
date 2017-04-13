@@ -154,6 +154,31 @@ class BotanicalMappingController extends Page_Controller
 
     }
 
+    public function Breadcrumb()
+    {
+        $breadcrumpList = ArrayList::create();
+        $inRoot = false;
+        $currentDataObject = $this->dataObject;
+
+        while (!$inRoot) {
+
+            $breadcrump = array(
+                'Title' => $currentDataObject->Title,
+                'Link' => $currentDataObject->EditLink(),
+                'Class' => $currentDataObject->RecordClassName
+            );
+
+            $breadcrumpList->push(new ArrayData($breadcrump));
+
+            $currentDataObject = $currentDataObject->getBreadcrumbParent();
+            if (!$currentDataObject) {
+                $inRoot = true;
+            }
+        }
+
+        return $breadcrumpList;
+    }
+
     public function Form()
     {
         return $this->EditForm();
@@ -181,34 +206,6 @@ class BotanicalMappingController extends Page_Controller
         $form->loadDataFrom($this->dataObject);
 
         return $form;
-    }
-
-
-    public function Breadcrumb()
-    {
-
-        $breadcrumpList = ArrayList::create();
-        $inRoot = false;
-        $currentDataObject = $this->dataObject;
-
-        while (!$inRoot) {
-
-            $breadcrump = array(
-                'Title' => $currentDataObject->Title,
-                'Link' => $currentDataObject->EditLink(),
-                'Class' => $currentDataObject->RecordClassName
-            );
-
-            $breadcrumpList->push(new ArrayData($breadcrump));
-
-
-            $currentDataObject = $currentDataObject->getBreadcrumbParent();
-            if(!$currentDataObject) {
-                $inRoot = true;
-            }
-        }
-
-        return $breadcrumpList;
     }
 
 
