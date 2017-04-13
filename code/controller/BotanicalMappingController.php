@@ -34,7 +34,6 @@ class BotanicalMappingController extends Page_Controller
         $ID = (int)$request->param('ID');
         $dataObjectName = $request->param('DataObjectName');
 
-
         // redirect if none or no valid dataobject name given
         if( !BotanicalMappingHelper::isValidDataObjectName($dataObjectName, true) ) {
             return $this->redirect(self::$controllerPath.'/BotanicalMappingProject/showlist');
@@ -87,6 +86,8 @@ class BotanicalMappingController extends Page_Controller
 
     public function delete(SS_HTTPRequest $request)
     {
+        DBLogger::log('delete', __METHOD__, SS_LOG_GENERAL);
+        $showListLink = $this->dataObject->ShowListLink();
         $delete = $this->dataObject->delete();
 
         if ($request->isAjax()) {
@@ -94,7 +95,7 @@ class BotanicalMappingController extends Page_Controller
                 ->renderWith('AjaxData');
         }
 
-        return $delete;
+        $this->redirect($showListLink);
     }
 
     public function save($data, Form $form, SS_HTTPRequest $request)
@@ -156,19 +157,19 @@ class BotanicalMappingController extends Page_Controller
 
     public function Breadcrumb()
     {
-        $breadcrumpList = ArrayList::create();
+        $breadcrumbs = ArrayList::create();
         $inRoot = false;
         $currentDataObject = $this->dataObject;
 
         while (!$inRoot) {
 
-            $breadcrump = array(
+            $breadcrumb = array(
                 'Title' => $currentDataObject->Title,
                 'Link' => $currentDataObject->EditLink(),
                 'Class' => $currentDataObject->RecordClassName
             );
 
-            $breadcrumpList->push(new ArrayData($breadcrump));
+            $breadcrumbs->push(new ArrayData($breadcrumb));
 
             $currentDataObject = $currentDataObject->getBreadcrumbParent();
             if (!$currentDataObject) {
@@ -176,7 +177,7 @@ class BotanicalMappingController extends Page_Controller
             }
         }
 
-        return $breadcrumpList;
+        return $breadcrumbs;
     }
 
     public function Form()
