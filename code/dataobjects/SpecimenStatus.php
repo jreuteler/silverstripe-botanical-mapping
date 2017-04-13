@@ -78,4 +78,25 @@ class SpecimenStatus extends DataObject
         return $this->Specimen();
     }
 
+    // TODO: permissions
+    public function canEdit($member = null)
+    {
+        return true;
+    }
+
+    public function canCreate($member = null)
+    {
+        return true;
+    }
+
+    public function canView($member = null)
+    {
+        return true;
+    }
+
+    public function canDelete($member = null)
+    {
+        return true;
+    }
+
 }
