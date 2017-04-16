@@ -39,6 +39,7 @@ class BotanicalSurvey extends DataObject
     {
         $fields = parent::getFrontEndFields($params);
 
+        $fields->add(LiteralField::create('Show on map', '<a href="'.BotanicalMappingController::$controllerPath.'/'.$this->ClassName.'/map/'.$this->ID.'">Show on map</a>'));
         $fields->add(LabelField::create('Specimens')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
