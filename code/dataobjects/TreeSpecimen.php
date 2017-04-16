@@ -59,7 +59,7 @@ class TreeSpecimen extends DataObject
         $autocomplete->setSuggestURL(BotanicalSuggestController::$controllerPath . '/TreeSpecies/ScientificName,CommonName');
         $fields->insertBefore('GeoLocation', $autocomplete);
 
-        $fields->add(LiteralField::create('Show on map', '<a href="'.BotanicalMappingController::$controllerPath.'/'.$this->ClassName.'/map/'.$this->ID.'">Show on map</a>'));
+        $fields->add(LiteralField::create('Show on map', '<a href="'.BotanicalMappingController::$controllerPath.'/'.$this->ClassName.'/map/'.$this->ID.'">Show this specimen on map</a>'));
         $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
