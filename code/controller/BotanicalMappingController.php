@@ -10,6 +10,7 @@ class BotanicalMappingController extends Page_Controller
         'delete',
         'save',
         'showlist',
+        'map',
         'CreateForm',
         'EditForm',
     );
@@ -35,8 +36,8 @@ class BotanicalMappingController extends Page_Controller
         $dataObjectName = $request->param('DataObjectName');
 
         // redirect if none or no valid dataobject name given
-        if( !BotanicalMappingHelper::isValidDataObjectName($dataObjectName, true) ) {
-            return $this->redirect(self::$controllerPath.'/BotanicalMappingProject/showlist');
+        if (!BotanicalMappingHelper::isValidDataObjectName($dataObjectName, true)) {
+            return $this->redirect(self::$controllerPath . '/BotanicalMappingProject/showlist');
         }
 
         // TODO: add/check permissions
@@ -154,6 +155,59 @@ class BotanicalMappingController extends Page_Controller
         return $this->customise($data)->renderWith(array($this->dataObject->RecordClassName . 'List', 'Page'));
 
     }
+
+
+    public function map(SS_HTTPRequest $request)
+    {
+
+        Requirements::css(BOTANICALMAPPING_DIR . '/vendor/openlayers/v4.0.1-dist/ol.css');
+        Requirements::javascript(BOTANICALMAPPING_DIR . '/vendor/openlayers/v4.0.1-dist/ol.js');
+        Requirements::javascript(BOTANICALMAPPING_DIR . '/code/javascript/geolocation_map.js');
+
+        $dataObjectName = $request->param('DataObjectName');
+        $specimens = TreeSpecimen::get();
+
+        switch ($dataObjectName) {
+
+            case 'BotanicalSurvey':
+                $specimens = $specimens->filter(
+                    array('SurveyID' => $request->param('ID')));
+                break;
+
+            case 'TreeSpecimen':
+                $specimens = $specimens->filter(
+                    array('ID' => $request->param('ID')));
+
+                break;
+
+        }
+
+        $surveyPositions = array();
+        foreach ($specimens as $specimen) {
+
+            $geoLocationArray = explode(',', $specimen->GeoLocation);
+            $positions[] = array(
+                'ID' => $specimen->ID,
+                'Title' => $specimen->getTitle(),
+                'GeoLocation' => $specimen->GeoLocation,
+                'Latitude' => @$geoLocationArray[0],
+                'Longitude' => @$geoLocationArray[1],
+                'Accuracy' => @$geoLocationArray[2]
+            );
+
+            $surveyPositions[$specimen->SurveyID][] = $positions;
+        }
+
+
+        $data = array(
+            'ClassName' => $this->dataObject->RecordClassName,
+            'Specimens' => $specimens,
+            'Surveys' => json_encode($surveyPositions)
+        );
+
+        return $this->customise($data)->renderWith(array('ShowMappedPoints', 'Page'));
+    }
+
 
     public function Breadcrumb()
     {
