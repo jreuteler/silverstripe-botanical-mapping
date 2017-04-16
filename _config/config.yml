@@ -12,8 +12,8 @@ SSViewer:
 Debug:
   friendly_error_httpcode: true
 
-
 Director:
+  alternate_protocol: 'https'
   rules:
     'import-tree-species': 'ImportTreeSpeciesController'
     'botanical-frontend': 'BotanicalMappingController'
