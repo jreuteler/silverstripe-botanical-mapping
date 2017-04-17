@@ -40,12 +40,17 @@ class BotanicalMappingProject extends DataObject
         $fields->add(LabelField::create('Surveys')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
-        $config->addComponent(new GridFieldEditableColumns());
-
-        $config->addComponent(new GridFieldAddNewInlineButton());
-        $config->addComponent(new GridFieldCustomEditButton());
-
-        $gridField = GridField::create('Surveys', 'Surveys', $this->Surveys(), $config);
+        $gridField = new GridField(
+            'Surveys',
+            'Project surveys',
+            $this->Surveys(),
+            GridFieldConfig::create()
+                ->addComponent(new GridFieldButtonRow('before'))
+                ->addComponent(new GridFieldTitleHeader())
+                ->addComponent(new GridFieldEditableColumns())
+                ->addComponent(new GridFieldCustomEditButton())
+                ->addComponent(new GridFieldAddNewInlineButton())
+        );
         $fields->add($gridField);
 
         return $fields;

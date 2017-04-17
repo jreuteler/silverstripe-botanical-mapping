@@ -63,11 +63,17 @@ class TreeSpecimen extends DataObject
         $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
-        $config->addComponent(new GridFieldEditableColumns());
-        $config->addComponent(new GridFieldAddNewInlineButton());
-        $config->addComponent(new GridFieldCustomEditButton());
-
-        $gridField = GridField::create('Statuses', 'Statuses', $this->Statuses(), $config);
+        $gridField = new GridField(
+            'Statuses',
+            'Statuses',
+            $this->Statuses(),
+            GridFieldConfig::create()
+                ->addComponent(new GridFieldButtonRow('before'))
+                ->addComponent(new GridFieldTitleHeader())
+                ->addComponent(new GridFieldEditableColumns())
+                ->addComponent(new GridFieldCustomEditButton())
+                ->addComponent(new GridFieldAddNewInlineButton())
+        );
         $fields->add($gridField);
 
         return $fields;
