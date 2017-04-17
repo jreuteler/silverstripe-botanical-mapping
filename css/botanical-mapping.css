@@ -32,3 +32,8 @@ form.botanical-mapping.ss-gridfield-editable td.col-Key input.text {
 .float-none {
     float: none !important;
 }
+
+#map #tooltip {
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
