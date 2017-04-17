@@ -113,12 +113,17 @@
 
         map.on('click', displayTooltip);
 
-        var boundingCoordinates = [];
-        coordinates.forEach(function(point) {
-            boundingCoordinates.push(point.getCoordinates());
-        });
-        var ext = ol.extent.boundingExtent(boundingCoordinates);
-        view.fit(ext, {padding: [170, 50, 30, 150], constrainResolution: false});
+        if (coordinates.length > 1) {
+
+            var boundingCoordinates = [];
+            coordinates.forEach(function (point) {
+                boundingCoordinates.push(point.getCoordinates());
+            });
+            var ext = ol.extent.boundingExtent(boundingCoordinates);
+            view.fit(ext, {padding: [170, 50, 30, 150], constrainResolution: false});
+
+        }
+
 
     });
 
