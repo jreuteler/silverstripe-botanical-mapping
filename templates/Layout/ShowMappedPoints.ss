@@ -24,16 +24,15 @@
 
     function displayTooltip(evt) {
         var pixel = evt.pixel;
-        var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+        var feature = map.forEachFeatureAtPixel(pixel, function (feature) {
             return feature;
         });
         tooltip.style.display = feature ? '' : 'none';
         if (feature) {
             overlay.setPosition(evt.coordinate);
-            tooltip.innerHTML = feature.get('name');
+            tooltip.innerHTML = '<a href="' + feature.get('data-edit-link') + '">' + feature.get('name') + '</a>';
         }
-    };
-
+    }
 
     var surveySpecimens = {$Surveys};
 
@@ -77,6 +76,7 @@
                          {name: specimen.Title}
                     );
 
+                    point.set('data-edit-link', specimen.EditLink);
                     point.setStyle(new ol.style.Style({
 
                         image: new ol.style.Icon(({
