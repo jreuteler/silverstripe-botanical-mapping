@@ -1,7 +1,11 @@
 #Form_EditForm {
-    min-width: 500px;
+    min-width: 300px;
     max-width: 800px;
     width: 100%;
+}
+
+#Form_EditForm .ss-gridfield-buttonrow .right {
+    clear: left;
 }
 
 #Form_EditForm .ss-gridfield-table td.col-LastRecordedTotalHeight,
