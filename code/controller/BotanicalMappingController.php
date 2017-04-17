@@ -186,7 +186,8 @@ class BotanicalMappingController extends Page_Controller
                 'GeoLocation' => $specimen->GeoLocation,
                 'Latitude' => @$geoLocationArray[0],
                 'Longitude' => @$geoLocationArray[1],
-                'Accuracy' => @$geoLocationArray[2]
+                'Accuracy' => @$geoLocationArray[2],
+                'EditLink' => $specimen->EditLink()
             );
 
             $surveyPositions[$specimen->SurveyID][] = $specimenData;
