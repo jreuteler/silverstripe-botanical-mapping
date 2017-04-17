@@ -264,6 +264,12 @@ class BotanicalMappingController extends Page_Controller
             }
         }
 
+        $breadcrumbs->push(new ArrayData(array(
+            'Title' => 'Projects',
+            'Link' => self::$controllerPath,
+            'Class' => 'Root'
+        )));
+
         return $breadcrumbs;
     }
 
