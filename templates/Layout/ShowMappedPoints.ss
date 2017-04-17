@@ -113,15 +113,14 @@
 
         map.on('click', displayTooltip);
 
-        if (coordinates.length > 1) {
+        if (coordinates.length > 0) {
 
             var boundingCoordinates = [];
             coordinates.forEach(function (point) {
                 boundingCoordinates.push(point.getCoordinates());
             });
             var ext = ol.extent.boundingExtent(boundingCoordinates);
-            view.fit(ext, {padding: [170, 50, 30, 150], constrainResolution: false});
-
+            view.fit(ext, {padding: [150, 50, 30, 150]}, map.getSize());
         }
 
 
