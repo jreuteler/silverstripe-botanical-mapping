@@ -252,13 +252,11 @@ class BotanicalMappingController extends Page_Controller
 
         while (!$inRoot) {
 
-            $breadcrumb = array(
+            $breadcrumbs->push(new ArrayData(array(
                 'Title' => $currentDataObject->Title,
                 'Link' => $currentDataObject->EditLink(),
                 'Class' => $currentDataObject->RecordClassName
-            );
-
-            $breadcrumbs->push(new ArrayData($breadcrumb));
+            )));
 
             $currentDataObject = $currentDataObject->getBreadcrumbParent();
             if (!$currentDataObject) {
