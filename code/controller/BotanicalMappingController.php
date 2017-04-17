@@ -219,7 +219,7 @@ class BotanicalMappingController extends Page_Controller
         $actions = new FieldList(
             $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
         );
-        $button->addExtraClass('button');
+        $button->addExtraClass('btn');
 
         $validator = new RequiredFields('Title');
 
