@@ -1,0 +1,9 @@
+#Form_EditForm .ss-gridfield-table td.col-LastRecordedTotalHeight,
+#Form_EditForm .ss-gridfield-table td.col-LastRecordedCrownHeight,
+#Form_EditForm .ss-gridfield-table td.col-LastRecordedDiameter {
+    display:none;
+}
+
+#Form_EditForm .ss-gridfield-editable td.col-Key input.text {
+    width: 85% !important;
+}
