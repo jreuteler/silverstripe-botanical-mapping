@@ -63,40 +63,35 @@
 
             var len = surveySpecimens[surveyID].length;
 
-            for (i = 0; i < len; i++) {
+            if (surveySpecimens[surveyID]) {
 
-                if (surveySpecimens[surveyID][i]) {
+                var survey = surveySpecimens[surveyID];
+                for (var s in survey) {
 
-                    var survey = surveySpecimens[surveyID][i];
-                    var speciesLen = survey.length;
-                    for (s = 0; s < speciesLen; s++) {
+                    var specimen = survey[s];
 
-                        var specimen = survey[s];
-                        var lat = +specimen.Latitude;
-                        var lon = +specimen.Longitude;
-                        var zoom = 13;
+                    console.log(specimen);
+                    var lat = +specimen.Latitude;
+                    var lon = +specimen.Longitude;
 
+                    coordinates.push(new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')));
+                    var point = new ol.Feature(
+                         {name: specimen.Title}
+                    );
 
-                        coordinates.push(new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')));
+                    point.setStyle(new ol.style.Style({
 
-                        var point = new ol.Feature(
-                                {name: specimen.Title}
-                        );
+                        image: new ol.style.Icon(({
+                            anchor: [0.5, 46],
+                            anchorXUnits: 'fraction',
+                            anchorYUnits: 'pixels',
+                            src: 'silverstripe-botanical-mapping/images/tree_icon.png'
+                        }))
 
-                        point.setStyle(new ol.style.Style({
+                    }));
 
-                            image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-                                anchor: [0.5, 46],
-                                anchorXUnits: 'fraction',
-                                anchorYUnits: 'pixels',
-                                src: 'silverstripe-botanical-mapping/images/tree_icon.png'
-                            }))
-
-                        }));
-                        point.setGeometry(new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')));
-                        features.push(point);
-                    }
-
+                    point.setGeometry(new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')));
+                    features.push(point);
                 }
 
             }

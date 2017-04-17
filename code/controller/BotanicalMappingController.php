@@ -179,8 +179,9 @@ class BotanicalMappingController extends Page_Controller
         foreach ($specimens as $specimen) {
 
             $geoLocationArray = explode(',', $specimen->GeoLocation);
-            $positions[] = array(
+            $specimenData = array(
                 'ID' => $specimen->ID,
+                'SurveyID' => $specimen->SurveyID,
                 'Title' => $specimen->getTitle(),
                 'GeoLocation' => $specimen->GeoLocation,
                 'Latitude' => @$geoLocationArray[0],
@@ -188,7 +189,7 @@ class BotanicalMappingController extends Page_Controller
                 'Accuracy' => @$geoLocationArray[2]
             );
 
-            $surveyPositions[$specimen->SurveyID][] = $positions;
+            $surveyPositions[$specimen->SurveyID][] = $specimenData;
         }
 
 
