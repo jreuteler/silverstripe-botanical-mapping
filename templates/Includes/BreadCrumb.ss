@@ -1,5 +1,9 @@
 <div class="breadcrumb">
     <% loop $Breadcrumb.Reverse %>
-        <a href="$Link" class="$Class">$Title</a> /
+
+        <% if $Title %>
+            <a href="$Link" class="$Class">$Title</a> /
+        <% end_if %>
+
     <% end_loop %>
 </div>
