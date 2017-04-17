@@ -94,9 +94,6 @@
 
                         }));
                         point.setGeometry(new ol.geom.Point(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857')));
-
-                        //point.addEventListener("click", alert('test'));
-
                         features.push(point);
                     }
 
@@ -105,9 +102,6 @@
             }
 
         }
-
-
-        var featureCollection = new ol.Collection(features);
 
         new ol.layer.Vector({
             map: map,
@@ -124,7 +118,7 @@
             boundingCoordinates.push(point.getCoordinates());
         });
         var ext = ol.extent.boundingExtent(boundingCoordinates);
-        view.fit(ext);
+        view.fit(ext, {padding: [170, 50, 30, 150], constrainResolution: false});
 
     });
 
