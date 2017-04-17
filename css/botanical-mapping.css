@@ -1,25 +1,25 @@
-#Form_EditForm {
+form.botanical-mapping {
     min-width: 300px;
     max-width: 800px;
     width: 100%;
 }
 
-#Form_EditForm .ss-gridfield-buttonrow .right {
+form.botanical-mapping .ss-gridfield-buttonrow .right {
     clear: left;
 }
 
-#Form_EditForm .ss-gridfield-table td.col-LastRecordedTotalHeight,
-#Form_EditForm .ss-gridfield-table td.col-LastRecordedCrownHeight,
-#Form_EditForm .ss-gridfield-table td.col-LastRecordedDiameter {
+form.botanical-mapping .ss-gridfield-table .col-LastRecordedTotalHeight,
+form.botanical-mapping .ss-gridfield-table .col-LastRecordedCrownHeight,
+form.botanical-mapping .ss-gridfield-table .col-LastRecordedDiameter {
     display:none;
 }
 
-#Form_EditForm .ss-gridfield-table td.col-GeoLocation {
+form.botanical-mapping .ss-gridfield-table td.col-GeoLocation {
     max-width: 250px;
     padding-right: 15px;
 }
 
-#Form_EditForm .ss-gridfield-editable td.col-Key input.text {
+form.botanical-mapping.ss-gridfield-editable td.col-Key input.text {
     max-width: 80px !important;
 }
 
