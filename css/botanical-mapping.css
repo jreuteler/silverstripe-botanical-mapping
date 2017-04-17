@@ -8,6 +8,12 @@ form.botanical-mapping .ss-gridfield-buttonrow .right {
     clear: left;
 }
 
+form.botanical-mapping .ss-gridfield-editable td .editable-column-field {
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
 form.botanical-mapping .ss-gridfield-table .col-LastRecordedTotalHeight,
 form.botanical-mapping .ss-gridfield-table .col-LastRecordedCrownHeight,
 form.botanical-mapping .ss-gridfield-table .col-LastRecordedDiameter {
