@@ -16,6 +16,7 @@ class SpecimenStatus extends DataObject
     );
 
     private static $summary_fields = array(
+        'Date',
         'TotalHeight',
         'CrownHeight',
         'Diameter',
