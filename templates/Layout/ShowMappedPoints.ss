@@ -110,9 +110,7 @@
             boundingCoordinates.push(point.getCoordinates());
         });
         var ext = ol.extent.boundingExtent(boundingCoordinates);
-        view.fit(ext, {padding: [250, 250, 30, 150]}, map.getSize());
-
-        map.getView().setZoom(map.getView().getZoom());
+        view.fit(ext, {padding: [100, 50, 30, 50]}, map.getSize());
 
     });
 
