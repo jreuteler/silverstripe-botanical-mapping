@@ -112,6 +112,10 @@
         var ext = ol.extent.boundingExtent(boundingCoordinates);
         view.fit(ext, {padding: [100, 50, 30, 50]}, map.getSize());
 
+        if(coordinates.length == 1) {
+            map.getView().setZoom(map.getView().getZoom()-8);
+        }
+
     });
 
 
