@@ -20,6 +20,7 @@ class BotanicalSurvey extends DataObject
 
     private static $summary_fields = array(
         'Title',
+        'SpecimenCount'
     );
 
     public static $allow_frontend_access = true;
@@ -59,6 +60,14 @@ class BotanicalSurvey extends DataObject
         return $fields;
     }
 
+    public function SpecimenCount()
+    {
+        if ($this->Specimens()) {
+            return $this->Specimens()->Count();
+        }
+
+        return 0;
+    }
 
     public function getBreadcrumbParent()
     {
@@ -86,14 +95,6 @@ class BotanicalSurvey extends DataObject
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
     
-    public function SpecimenCount()
-    {
-        if ($this->Specimens()) {
-            return $this->Specimens()->Count();
-        }
-
-        return 0;
-    }
 
     public function getSpecimenPositionsJSON()
     {
