@@ -104,20 +104,17 @@
                 features: features
             })
         });
-
-
+        
         map.on('click', displayTooltip);
 
-        if (coordinates.length > 0) {
+        var boundingCoordinates = [];
+        coordinates.forEach(function (point) {
+            boundingCoordinates.push(point.getCoordinates());
+        });
+        var ext = ol.extent.boundingExtent(boundingCoordinates);
+        view.fit(ext, {padding: [250, 250, 30, 150]}, map.getSize());
 
-            var boundingCoordinates = [];
-            coordinates.forEach(function (point) {
-                boundingCoordinates.push(point.getCoordinates());
-            });
-            var ext = ol.extent.boundingExtent(boundingCoordinates);
-            view.fit(ext, {padding: [150, 50, 30, 150]}, map.getSize());
-        }
-
+        map.getView().setZoom(map.getView().getZoom());
 
     });
 
