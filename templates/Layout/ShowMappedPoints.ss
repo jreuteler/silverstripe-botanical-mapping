@@ -69,8 +69,6 @@
                 for (var s in survey) {
 
                     var specimen = survey[s];
-
-                    console.log(specimen);
                     var lat = +specimen.Latitude;
                     var lon = +specimen.Longitude;
 
