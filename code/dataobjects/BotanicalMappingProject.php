@@ -56,6 +56,13 @@ class BotanicalMappingProject extends DataObject
         return $fields;
     }
 
+    public function SurveyCount()
+    {
+        if($this->Surveys()) {
+            return $this->Surveys()->Count();
+        }
+        return 0;
+    }
 
     public function Link()
     {
