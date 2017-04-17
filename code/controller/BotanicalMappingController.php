@@ -25,6 +25,8 @@ class BotanicalMappingController extends Page_Controller
 
     public function init()
     {
+        Requirements::css(BOTANICALMAPPING_DIR . '/css/botanical-mapping.css');
+
         $this->f = new JSONDataFormatter();
         parent::init();
     }
