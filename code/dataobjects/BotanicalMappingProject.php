@@ -16,7 +16,8 @@ class BotanicalMappingProject extends DataObject
     );
 
     private static $summary_fields = array(
-        'Title'
+        'Title',
+        'SurveyCount'
     );
 
     public static $allow_frontend_access = true;
