@@ -111,19 +111,10 @@ class BotanicalMappingController extends Page_Controller
         $this->dataObject->write();
 
         if ($this->request->isAjax()) {
-
-            // TODO: Test
-            $this->response->addHeader('Content-type', 'application/json');
-            return json_encode(array(
-                'message' => 'success',
-                'class' => $this->dataObject->RecordClassName,
-                'id' => $this->dataObject->ID,
-                'form' => $this->EditForm()->forTemplate()->raw()
-            ));
+            // TODO:
         } else {
             $this->redirect($this->dataObject->EditLink());
         }
-
 
     }
 
@@ -211,6 +202,46 @@ class BotanicalMappingController extends Page_Controller
     }
 
 
+
+
+    public function Form()
+    {
+        return $this->EditForm();
+    }
+
+    public function EditForm()
+    {
+        $object = $this->dataObject;
+        $fields = $object->getFrontEndFields();
+
+        $actions = new FieldList(
+            $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
+        );
+        $button->addExtraClass('button');
+
+        $validator = new RequiredFields('Title');
+
+        $form = new Form($this, __FUNCTION__.'/'.$object->ID, $fields, $actions, $validator);
+
+        $form->loadDataFrom($this->dataObject);
+        $form->addExtraClass('botanical-mapping');
+
+        return $form;
+    }
+
+
+    public function Link($action = null)
+    {
+        $request = Controller::curr()->getRequest();
+        $dataObjectName = $request->param('DataObjectName');
+
+        if ($action) {
+            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName, $action);
+        } else {
+            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName);
+        }
+    }
+
     public function Breadcrumb()
     {
         $breadcrumbs = ArrayList::create();
@@ -235,48 +266,5 @@ class BotanicalMappingController extends Page_Controller
 
         return $breadcrumbs;
     }
-
-    public function Form()
-    {
-        return $this->EditForm();
-    }
-
-    public function EditForm()
-    {
-        $object = $this->dataObject;
-        $fields = $object->getFrontEndFields();
-
-        $actions = new FieldList(
-            $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
-        );
-        $button->addExtraClass('button');
-
-        $validator = new RequiredFields('Title');
-
-        $form = new Form($this, 'EditForm', $fields, $actions, $validator);
-
-
-        if ($this->dataObject->isInDb()) {
-            $form->Fields()->push(new HiddenField('ID', '', $this->dataObject->ID));
-        }
-
-        $form->loadDataFrom($this->dataObject);
-
-        return $form;
-    }
-
-
-    public function Link($action = null)
-    {
-        $request = Controller::curr()->getRequest();
-        $dataObjectName = $request->param('DataObjectName');
-
-        if ($action) {
-            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName, $action);
-        } else {
-            return Controller::join_links(Director::baseURL(), 'botanical-frontend', $dataObjectName);
-        }
-    }
-
 
 }
