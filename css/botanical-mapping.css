@@ -1,9 +1,24 @@
+#Form_EditForm {
+    min-width: 500px;
+    max-width: 800px;
+    width: 100%;
+}
+
 #Form_EditForm .ss-gridfield-table td.col-LastRecordedTotalHeight,
 #Form_EditForm .ss-gridfield-table td.col-LastRecordedCrownHeight,
 #Form_EditForm .ss-gridfield-table td.col-LastRecordedDiameter {
     display:none;
 }
 
+#Form_EditForm .ss-gridfield-table td.col-GeoLocation {
+    max-width: 250px;
+    padding-right: 15px;
+}
+
 #Form_EditForm .ss-gridfield-editable td.col-Key input.text {
-    width: 85% !important;
+    max-width: 80px !important;
+}
+
+.float-none {
+    float: none !important;
 }
