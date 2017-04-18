@@ -23,14 +23,30 @@ class BotanicalSurvey extends DataObject
         'SpecimenCount'
     );
 
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels(true);
+        $labels['Title'] = _t('BotanicalSurvey.Title', 'Title');
+        $labels['SpecimenCount'] = _t('BotanicalSurvey.SpecimenCount', '#');
+        $labels['Project'] = _t('BotanicalMapping.Project', 'Project');
+
+        return $labels;
+    }
+
+
     public static $allow_frontend_access = true;
-    
+
     public function getCMSFields()
     {
+        $title = TextField::create('Title', _t('BotanicalSurvey.Title', 'Title'));
+
+        $conf = GridFieldConfig_RelationEditor::create();
+        $specimens = new GridField('Specimens', _t('BotanicalMapping.Specimens', 'Specimens'), $this->Specimens(), $conf);
+
         $conf = GridFieldConfig_RelationEditor::create();
         $fields = FieldList::create(
-            TextField::create('Title', 'Survey'),
-            new GridField('Specimens', 'Specimens', $this->Specimens(), $conf)
+            $title,
+            $specimens
         );
 
         return $fields;
@@ -40,8 +56,9 @@ class BotanicalSurvey extends DataObject
     {
         $fields = parent::getFrontEndFields($params);
 
-        $fields->add(LabelField::create('Specimens')->addExtraClass('left'));
-        $fields->add(LiteralField::create('Show on map', '<a class="btn float-none" href="'.BotanicalMappingController::$controllerPath.'/'.$this->ClassName.'/map/'.$this->ID.'">Show all specimens of this survey on map</a>'));
+        $fields->add(LabelField::create(_t('BotanicalMapping.Specimens', 'Specimens'))->addExtraClass('left'));
+        $fields->add(LiteralField::create('Show on map', '<a class="btn float-none" href="' . BotanicalMappingController::$controllerPath . '/' . $this->ClassName . '/map/' . $this->ID . '">' . _t('BotanicalSurvey.ShowOnMap', 'Show all specimens of this survey on map') . '</a>'));
+
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $gridField = new GridField(
@@ -56,6 +73,7 @@ class BotanicalSurvey extends DataObject
                 ->addComponent(new GridFieldAddNewInlineButton())
         );
         $fields->add($gridField);
+
 
         return $fields;
     }
@@ -94,7 +112,7 @@ class BotanicalSurvey extends DataObject
     {
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
-    
+
 
     public function getSpecimenPositionsJSON()
     {

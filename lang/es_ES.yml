@@ -1,0 +1,41 @@
+es_ES:
+  BotanicalMapping:
+   Project: 'Proyecto'
+   Projects: 'Proyectos'
+   Survey: 'Informe'
+   Surveys: 'Informes'
+   Species: 'Especies'
+   Specimen: 'Espécimen'
+   Specimens: 'Especímenes'
+   Save: 'Guardar'
+
+  BotanicalMappingProject:
+   Title: 'Título'
+   SurveyCount: 'Cantidad'
+
+  BotanicalSurvey:
+   Title: 'Título'
+   SpecimenCount: 'Cantidad'
+   ShowOnMap: 'Mostrar todos los especímenes del informe en el mapa'
+
+  TreeSpecimen:
+   Number: 'Número'
+   Species: 'Tipo'
+   SpeciesTitle: 'Tipo'
+   LastRecordedTotalHeight: 'Ultima altura conocida'
+   LastRecordedCrownHeight: 'Ultima altura de copa conocida'
+   LastRecordedDiameter: 'Ultimao diámetro conocido'
+   GeoLocation: 'GPS posición'
+   Comment: 'Comentario'
+   SpecimenStatus: 'Evaluaciónes'
+   ShowOnMap: 'Mostrar espécimen en el mapa'
+
+  SpecimenStatus:
+   Date: 'Fecha'
+   TotalHeight: 'Altura'
+   CrownHeight: 'Altura de copa'
+   Diameter: 'Diámetro'
+   Comment: 'Comentario'
+   Image: 'Imagen'
+
+

@@ -1,0 +1,41 @@
+de_DE:
+  BotanicalMapping:
+   Project: 'Projekt'
+   Projects: 'Projekte'
+   Survey: 'Gutachten'
+   Surveys: 'Gutachten'
+   Species: 'Spezies'
+   Specimen: 'Exemplar'
+   Specimens: 'Exemplare'
+   Save: 'Speichern'
+
+  BotanicalMappingProject:
+   Title: 'Titel'
+   SurveyCount: 'Anzahl'
+
+  BotanicalSurvey:
+   Title: 'Titel'
+   SpecimenCount: 'Anzahl'
+   ShowOnMap: 'Alle Exemplare dieses Gutachten auf Karte anzeigen'
+
+  TreeSpecimen:
+   Number: 'Nummer'
+   Species: 'Typ'
+   SpeciesTitle: 'Typ'
+   LastRecordedTotalHeight: 'Letzte bekannte Höhe'
+   LastRecordedCrownHeight: 'Letzte bekannte Höhe der Baumkrone'
+   LastRecordedDiameter: 'Letzte bekannter Stammdurchmesser'
+   GeoLocation: 'GPS-Position'
+   Comment: 'Kommentar'
+   SpecimenStatus: 'Bestandesaufnahme'
+   ShowOnMap: 'Dieses Exemplar auf Karte anzeigen'
+
+  SpecimenStatus:
+   Date: 'Datum'
+   TotalHeight: 'Höhe'
+   CrownHeight: 'Höhe Baumkrone'
+   Diameter: 'Durchmesser'
+   Comment: 'Kommentar'
+   Image: 'Bild'
+
+

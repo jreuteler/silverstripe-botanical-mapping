@@ -26,8 +26,23 @@ class TreeSpecimen extends DataObject
         'GeoLocation'
     );
 
-    private static $indexes = array(
-        //'uniqueConstraint' => 'unique("Number", "SurveyID")'
+
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels(true);
+        $labels['Number'] = _t('TreeSpecimen.Number', 'Number');
+        $labels['SpeciesTitle'] = _t('TreeSpecimen.SpeciesTitle', 'SpeciesTitle');
+        $labels['Comment'] = _t('TreeSpecimen.Comment', 'Comment');
+        $labels['SpeciesID'] = _t('BotanicalMapping.Species', 'Species');
+        $labels['LastRecordedTotalHeight'] = _t('TreeSpecimen.LastRecordedTotalHeight', 'LastRecordedTotalHeight');
+        $labels['LastRecordedCrownHeight'] = _t('TreeSpecimen.LastRecordedCrownHeight', 'LastRecordedCrownHeight');
+        $labels['LastRecordedDiameter'] = _t('TreeSpecimen.LastRecordedDiameter', 'LastRecordedDiameter');
+        $labels['GeoLocation'] = _t('TreeSpecimen.GeoLocation', 'GeoLocation');
+        return $labels;
+    }
+
+
+    private static $indexes = array(//'uniqueConstraint' => 'unique("Number", "SurveyID")'
     );
 
     static $defaults = array('Number' => 1);
@@ -38,19 +53,25 @@ class TreeSpecimen extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        $fields->removeByName('SurveyID');
-        $fields->replaceField('GeoLocation', GeoLocationField::create('GeoLocation'));
-        $fields->removeByName('SpeciesID');
-
-        $autocomplete = AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
-        $fields->insertBefore('GeoLocation', $autocomplete);
+        $number = TextField::create('Number', _t('TreeSpecimen.Number', '#'));
+        $species = AutoCompleteField::create('SpeciesID', _t('BotanicalMapping.Species', 'Species'), '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
+        $geolocation = GeoLocationField::create('GeoLocation', _t('TreeSpecimen.GeoLocation', 'Geo location'));
+        $comment = TextareaField::create('Comment', _t('TreeSpecimen.Comment', 'Comment'));
 
         $conf = GridFieldConfig_RelationEditor::create();
-        $fields->insertAfter('Comment', new GridField('SpecimenStatus', 'SpecimenStatus', $this->Statuses(), $conf));
-        $fields->removeByName('Statuses');
+        $specimenStatus = new GridField('SpecimenStatus', _t('TreeSpecimen.SpecimenStatus', 'SpecimenStatus'), $this->Statuses(), $conf);
+
+
+        $fields = FieldList::create(
+            $number,
+            $species,
+            $geolocation,
+            $comment,
+            $specimenStatus
+        );
 
         return $fields;
+        
     }
 
     public function getFrontEndFields($params = NULL)
@@ -59,11 +80,12 @@ class TreeSpecimen extends DataObject
         $fields->removeByName('SurveyID');
         $fields->removeByName('SpeciesID');
 
-        $autocomplete = AutoCompleteField::create('SpeciesID', 'Species', '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
+        $autocomplete = AutoCompleteField::create('SpeciesID', _t('BotanicalMapping.Species', 'Species'), '', null, null, 'TreeSpecies', array('ScientificName', 'CommonName'));
         $autocomplete->setSuggestURL(BotanicalSuggestController::$controllerPath . '/TreeSpecies/ScientificName,CommonName');
         $fields->insertBefore('GeoLocation', $autocomplete);
 
-        $fields->insertBefore('Comment', LiteralField::create('Show on map', '<a class="btn float-none" href="'.BotanicalMappingController::$controllerPath.'/'.$this->ClassName.'/map/'.$this->ID.'">Show this specimen on map</a>'));
+
+        $fields->insertBefore('Comment', LiteralField::create('Show on map', '<a class="btn float-none" href="' . BotanicalMappingController::$controllerPath . '/' . $this->ClassName . '/map/' . $this->ID . '">' . _t('TreeSpecimen.ShowOnMap', 'Show this specimen on map') . '</a>'));
         $fields->add(LabelField::create('Statuses')->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
@@ -82,7 +104,7 @@ class TreeSpecimen extends DataObject
 
         return $fields;
     }
-     
+
     public function SpeciesTitle()
     {
         if ($this->Species()) {
@@ -94,7 +116,7 @@ class TreeSpecimen extends DataObject
 
     public function getTitle()
     {
-        return ($this->Number ? '#'.$this->Number .' - ' : '').$this->SpeciesTitle();
+        return ($this->Number ? '#' . $this->Number . ' - ' : '') . $this->SpeciesTitle();
     }
 
     public function Link()

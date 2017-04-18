@@ -16,18 +16,30 @@ class BotanicalMappingProject extends DataObject
     );
 
     private static $summary_fields = array(
-        'Title',
-        'SurveyCount'
+        'Title' => 'Title',
+        'SurveyCount' => 'SurveyCount'
     );
 
     public static $allow_frontend_access = true;
 
+
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels(true);
+        $labels['Title'] = _t('BotanicalMappingProject.Title', 'Title');
+        $labels['SurveyCount'] = _t('BotanicalMappingProject.SurveyCount', 'Count');
+        return $labels;
+    }
+
     public function getCMSFields()
     {
+        $title = TextField::create('Title', _t('BotanicalMappingProject.Title', 'Title'));
         $conf = GridFieldConfig_RelationEditor::create();
+        $surveys = new GridField('Surveys', _t('BotanicalMapping.Surveys', 'Surveys'), $this->Surveys(), $conf);
+
         $fields = FieldList::create(
-            TextField::create('Title', 'Project'),
-            new GridField('Surveys', 'Surveys', $this->Surveys(), $conf)
+            $title,
+            $surveys
         );
 
         return $fields;
@@ -38,7 +50,7 @@ class BotanicalMappingProject extends DataObject
 
         $fields = parent::getFrontEndFields($params);
 
-        $fields->add(LabelField::create('Surveys')->addExtraClass('left'));
+        $fields->add(LabelField::create(_t('BotanicalMapping.Surveys', 'Surveys'))->addExtraClass('left'));
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $gridField = new GridField(
@@ -59,7 +71,7 @@ class BotanicalMappingProject extends DataObject
 
     public function SurveyCount()
     {
-        if($this->Surveys()) {
+        if ($this->Surveys()) {
             return $this->Surveys()->Count();
         }
         return 0;
@@ -79,6 +91,7 @@ class BotanicalMappingProject extends DataObject
     {
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
+
     public function getBreadcrumbParent()
     {
         return false;

@@ -224,13 +224,13 @@ class BotanicalMappingController extends Page_Controller
         $fields = $object->getFrontEndFields();
 
         $actions = new FieldList(
-            $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
+            $button = new FormAction('save', _t('BotanicalMapping.Save', 'Save'))
         );
         $button->addExtraClass('btn save-btn');
 
         $validator = new RequiredFields('Title');
 
-        $form = new Form($this, __FUNCTION__.'/'.$object->ID, $fields, $actions, $validator);
+        $form = new Form($this, __FUNCTION__ . '/' . $object->ID, $fields, $actions, $validator);
 
         $form->loadDataFrom($this->dataObject);
         $form->addExtraClass('botanical-mapping');

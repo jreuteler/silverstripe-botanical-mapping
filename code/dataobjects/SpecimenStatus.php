@@ -27,10 +27,25 @@ class SpecimenStatus extends DataObject
 
     public static $allow_frontend_access = true;
 
+
+    public function fieldLabels($includerelations = true)
+    {
+        $labels = parent::fieldLabels(true);
+        $labels['Date'] = _t('SpecimenStatus.Date', 'Date');
+        $labels['TotalHeight'] = _t('SpecimenStatus.TotalHeight', 'Total height');
+        $labels['CrownHeight'] = _t('SpecimenStatus.CrownHeight', 'Crown height');
+        $labels['Diameter'] = _t('SpecimenStatus.Diameter', 'Diameter');
+        $labels['Comment'] = _t('SpecimenStatus.Comment', 'Comment');
+        $labels['Image'] = _t('SpecimenStatus.Image', 'Image');
+        return $labels;
+    }
+
+
     /**
      * Sets the Date field to the current date.
      */
-    public function populateDefaults() {
+    public function populateDefaults()
+    {
         parent::populateDefaults();
 
         $this->Date = date('d-M-Y');
@@ -41,13 +56,9 @@ class SpecimenStatus extends DataObject
         $fields = parent::getCMSFields();
 
         $datefield = DateField::create('Date')
-            ->setConfig('showcalendar', true)
-            ->setConfig('dateformat', 'dd-MM-yyyy');
-
+            ->setConfig('showcalendar', true);
         $fields->replaceField('Date', $datefield);
         $fields->removeByName('SpecimenID');
-
-
 
         return $fields;
     }
@@ -55,11 +66,10 @@ class SpecimenStatus extends DataObject
     public function getFrontEndFields($params = NULL)
     {
         $fields = parent::getFrontEndFields($params);
-
+        $fields->removeByName('Image');
         $fields->removeByName('SpecimenID');
         $datefield = DateField::create('Date')
-            ->setConfig('showcalendar', true)
-            ->setConfig('dateformat', 'dd-MM-yyyy');
+            ->setConfig('showcalendar', true);
 
         $fields->replaceField('Date', $datefield);
         $fields->insertBefore('Date', ReadonlyField::create('Species')->setValue($this->Specimen()->getTitle()));
@@ -85,6 +95,7 @@ class SpecimenStatus extends DataObject
     {
         return BotanicalMappingController::$controllerPath . '/' . $this->RecordClassName . '/showlist';
     }
+
     public function getBreadcrumbParent()
     {
         return $this->Specimen();
