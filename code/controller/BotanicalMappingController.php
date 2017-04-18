@@ -25,6 +25,15 @@ class BotanicalMappingController extends Page_Controller
 
     public function init()
     {
+        $request = Controller::curr()->getRequest();
+        if( $set_locale = $request->postVar('SetLocale')) {
+            Cookie::set('set_locale', $set_locale);
+        }
+
+        if(Cookie::get('set_locale')) {
+            i18n::set_locale(Cookie::get('set_locale'));
+        }
+
         // jQuery
         Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 
@@ -231,6 +240,36 @@ class BotanicalMappingController extends Page_Controller
         $form->loadDataFrom($this->dataObject);
         $form->addExtraClass('botanical-mapping');
 
+        return $form;
+    }
+
+
+    public function LanguageForm()
+    {
+        $request = Controller::curr()->getRequest();
+        $action = $request->param('Action');
+
+        $object = $this->dataObject;
+
+        $language = DropdownField::create('SetLocale', _t('BotanicalMapping.Language', 'Language'))->setSource(
+            array(
+                'en' => 'English',
+                'de_DE' => 'Deutsch',
+                'es_ES' => 'Español'
+            ));
+
+        $language->setValue(i18n::get_locale());
+
+        $fields = FieldList::create(
+            $language
+        );
+
+        $actions = new FieldList(
+            $button = new FormAction('setlanguage', _t('BotanicalMapping.SetLanguage', 'Set'))
+        );
+
+        $validator = new RequiredFields('SetLocale');
+        $form = new Form($this, $action . '/' . $object->ID, $fields, $actions, $validator);
         return $form;
     }
 
