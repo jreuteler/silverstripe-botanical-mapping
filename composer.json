@@ -20,7 +20,8 @@
     "jreuteler/silverstripe-geolocation-field": "^1.0@alpha",
     "jreuteler/silverstripe-db-log": "^1.0",
     "tractorcow/silverstripe-autocomplete": "^3.4",
-    "silverstripe-australia/gridfieldextensions": "^1.4"
+    "silverstripe-australia/gridfieldextensions": "^1.4",
+    "unclecheese/betterbuttons": "^1.3"
   },
   "prefer-stable": true,
   "minimum-stability": "dev"
