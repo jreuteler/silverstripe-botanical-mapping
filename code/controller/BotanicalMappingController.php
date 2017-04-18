@@ -25,6 +25,13 @@ class BotanicalMappingController extends Page_Controller
 
     public function init()
     {
+        // jQuery
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+
+        // Entwine
+        Requirements::javascript(THIRDPARTY_DIR . '/jquery-entwine/dist/jquery.entwine-dist.js');
+
+        Requirements::javascript(BOTANICALMAPPING_DIR . '/code/javascript/botanical-mapping.js');
         Requirements::css(BOTANICALMAPPING_DIR . '/css/botanical-mapping.css');
 
         $this->f = new JSONDataFormatter();
@@ -219,7 +226,7 @@ class BotanicalMappingController extends Page_Controller
         $actions = new FieldList(
             $button = new FormAction('save', _t('Dashboards.SAVE', 'Save'))
         );
-        $button->addExtraClass('btn');
+        $button->addExtraClass('btn save-btn');
 
         $validator = new RequiredFields('Title');
 
