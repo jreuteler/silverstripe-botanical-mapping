@@ -30,6 +30,8 @@ class TreeSpecimen extends DataObject
         'uniqueConstraint' => 'unique("Key", "SurveyID")'
     );
 
+    private static $default_sort = 'ID DESC';
+
     public static $allow_frontend_access = true;
 
     public function getCMSFields()
