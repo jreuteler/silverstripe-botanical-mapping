@@ -4,10 +4,14 @@ es_ES:
    Projects: 'Proyectos'
    Survey: 'Informe'
    Surveys: 'Informes'
-   Species: 'Especies'
+   Species: 'Especie'
+   SpeciesPl: 'Especies'
    Specimen: 'Espécimen'
    Specimens: 'Especímenes'
    Save: 'Guardar'
+   Language: 'Idioma'
+   SetLanguage: 'Cambiar'
+
 
   BotanicalMappingProject:
    Title: 'Título'
@@ -15,7 +19,7 @@ es_ES:
 
   BotanicalSurvey:
    Title: 'Título'
-   SpecimenCount: 'Cantidad'
+   SpecimenCount: 'Numéro de especímenes'
    ShowOnMap: 'Mostrar todos los especímenes del informe en el mapa'
 
   TreeSpecimen:

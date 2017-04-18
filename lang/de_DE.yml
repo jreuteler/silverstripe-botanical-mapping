@@ -5,9 +5,12 @@ de_DE:
    Survey: 'Gutachten'
    Surveys: 'Gutachten'
    Species: 'Spezies'
+   SpeciesPl: 'Spezies'
    Specimen: 'Exemplar'
    Specimens: 'Exemplare'
    Save: 'Speichern'
+   Language: 'Sprache'
+   SetLanguage: 'Wechseln'
 
   BotanicalMappingProject:
    Title: 'Titel'
