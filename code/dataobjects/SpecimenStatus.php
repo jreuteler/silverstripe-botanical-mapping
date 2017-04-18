@@ -27,6 +27,15 @@ class SpecimenStatus extends DataObject
 
     public static $allow_frontend_access = true;
 
+    /**
+     * Sets the Date field to the current date.
+     */
+    public function populateDefaults() {
+        parent::populateDefaults();
+
+        $this->Date = date('d-M-Y');
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
