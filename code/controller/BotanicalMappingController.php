@@ -307,7 +307,7 @@ class BotanicalMappingController extends Page_Controller
         }
 
         $breadcrumbs->push(new ArrayData(array(
-            'Title' => 'Projects',
+            'Title' => _t('BotanicalMapping.Projects', 'Projects'),
             'Link' => self::$controllerPath,
             'Class' => 'Root'
         )));
