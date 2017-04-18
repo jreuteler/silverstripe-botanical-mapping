@@ -34,7 +34,7 @@ form.botanical-mapping .ss-gridfield-table td.col-GeoLocation {
     padding-right: 15px;
 }
 
-form.botanical-mapping.ss-gridfield-editable td.col-Key input.text {
+form.botanical-mapping.ss-gridfield-editable td.col-Number input.text {
     max-width: 80px !important;
 }
 

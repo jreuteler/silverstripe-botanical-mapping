@@ -3,7 +3,7 @@
 class TreeSpecimen extends DataObject
 {
     public static $db = array(
-        'Key' => 'Varchar',
+        'Number' => 'Int',
         'GeoLocation' => 'SS_GeoLocation',
         'Comment' => 'Text',
     );
@@ -18,7 +18,7 @@ class TreeSpecimen extends DataObject
     );
 
     private static $summary_fields = array(
-        'Key',
+        'Number',
         'SpeciesTitle',
         'LastRecordedTotalHeight',
         'LastRecordedCrownHeight',
@@ -27,8 +27,10 @@ class TreeSpecimen extends DataObject
     );
 
     private static $indexes = array(
-        'uniqueConstraint' => 'unique("Key", "SurveyID")'
+        //'uniqueConstraint' => 'unique("Number", "SurveyID")'
     );
+
+    static $defaults = array('Number' => 1);
 
     private static $default_sort = 'ID DESC';
 
@@ -80,7 +82,7 @@ class TreeSpecimen extends DataObject
 
         return $fields;
     }
-
+     
     public function SpeciesTitle()
     {
         if ($this->Species()) {
@@ -92,7 +94,7 @@ class TreeSpecimen extends DataObject
 
     public function getTitle()
     {
-        return ($this->Key ? $this->Key .' - ' : '').$this->SpeciesTitle();
+        return ($this->Number ? '#'.$this->Number .' - ' : '').$this->SpeciesTitle();
     }
 
     public function Link()
