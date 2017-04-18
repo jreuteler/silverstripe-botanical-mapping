@@ -53,18 +53,42 @@ class SpecimenStatus extends DataObject
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-
-        $datefield = DateField::create('Date')
-            ->setConfig('showcalendar', true);
-        $fields->replaceField('Date', $datefield);
-        $fields->removeByName('SpecimenID');
+        $date = DateField::create('Date', _t('SpecimenStatus.Date', 'Date'))->setConfig('showcalendar', true);
+        $totalHeight = NumericField::create('TotalHeight',  _t('SpecimenStatus.TotalHeight', 'Total height'))->setAttribute('placeholder', 'm');
+        $crownHeight = NumericField::create('CrownHeight', _t('SpecimenStatus.CrownHeight', 'Crown height'))->setAttribute('placeholder', 'm');
+        $diameter = NumericField::create('Diameter', _t('SpecimenStatus.Diameter', 'Diameter'))->setAttribute('placeholder', 'cm');
+        $commment = TextareaField::create('Comment',  _t('SpecimenStatus.Comment', 'Comment'));
+        $fields = FieldList::create(
+            ReadonlyField::create('Species', _t('BotanicalMapping.Species', 'Species'))->setValue($this->Specimen()->getTitle()),
+            $date,
+            $totalHeight,
+            $crownHeight,
+            $diameter,
+            $commment
+        );
 
         return $fields;
     }
 
     public function getFrontEndFields($params = NULL)
     {
+        $date = DateField::create('Date', _t('SpecimenStatus.Date', 'Date'))->setConfig('showcalendar', true);
+        $totalHeight = NumericField::create('TotalHeight', _t('SpecimenStatus.TotalHeight', 'Total height'))->setAttribute('placeholder', 'm');
+        $crownHeight = NumericField::create('CrownHeight', _t('SpecimenStatus.CrownHeight', 'Crown height'))->setAttribute('placeholder', 'm');
+        $diameter = NumericField::create('Diameter', _t('SpecimenStatus.Diameter', 'Diameter'))->setAttribute('placeholder', 'cm');
+        $commment = TextareaField::create('Comment', _t('SpecimenStatus.Comment', 'Comment'));
+
+        $fields = FieldList::create(
+            ReadonlyField::create('Species', _t('BotanicalMapping.Species', 'Species'))->setValue($this->Specimen()->getTitle()),
+            $date,
+            $totalHeight,
+            $crownHeight,
+            $diameter,
+            $commment
+        );
+
+        return $fields;
+
         $fields = parent::getFrontEndFields($params);
         $fields->removeByName('Image');
         $fields->removeByName('SpecimenID');
