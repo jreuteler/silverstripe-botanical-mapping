@@ -63,6 +63,12 @@ form.botanical-mapping .ss-gridfield-table .action.edit-link {
     border-bottom: 1px solid transparent;
 }
 
+
+form.botanical-mapping a.btn.float-none:after {
+    content: '';
+    padding: 0;
+}
+
 .float-none {
     float: none !important;
 }
