@@ -1,6 +1,16 @@
+/** Some temporary css to adjust the currently used Simple theme **/
+
 .header {
     display: none;
 }
+
+.main .inner {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+
+}
+
+
 
 .breadcrumb {
     font-weight: bold;
@@ -34,12 +44,23 @@ form.botanical-mapping .ss-gridfield-table td.col-GeoLocation {
     padding-right: 15px;
 }
 
-form.botanical-mapping.ss-gridfield-editable td.col-Number input.text {
-    max-width: 80px !important;
+form.botanical-mapping .ss-gridfield-table td.col-Number input.text {
+    width: 40px !important;
+    max-width: 50px !important;
 }
 
 form.botanical-mapping .ss-gridfield-table td.col-buttons .ss-gridfield-delete-inline {
     display: none;
+}
+
+form.botanical-mapping .ss-gridfield-table .action.edit-link {
+    background-image:url('../../silverstripe-botanical-mapping/images/edit_icon.png');
+    display:block;
+    height:32px;
+    width: 32px;
+    background-size: contain;
+    text-indent:-9999px;
+    border-bottom: 1px solid transparent;
 }
 
 .float-none {
