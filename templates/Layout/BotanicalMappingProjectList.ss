@@ -1,7 +1,5 @@
 
-<h1> Mapping projects </h1>
 <% include BreadCrumb %>
-
 
 <ul>
     <% loop $Records %>
