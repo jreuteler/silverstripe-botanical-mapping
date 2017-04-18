@@ -23,6 +23,8 @@ class SpecimenStatus extends DataObject
         'Comment',
     );
 
+    private static $default_sort = 'Date DESC';
+
     public static $allow_frontend_access = true;
 
     public function getCMSFields()
