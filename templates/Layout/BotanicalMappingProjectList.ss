@@ -1,3 +1,4 @@
+
 <h1> Mapping projects </h1>
 <% include BreadCrumb %>
 
@@ -12,3 +13,4 @@
     <% end_loop %>
 </ul>
 
+$LanguageForm
