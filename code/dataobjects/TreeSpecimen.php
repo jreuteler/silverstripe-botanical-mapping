@@ -30,8 +30,8 @@ class TreeSpecimen extends DataObject
     public function fieldLabels($includerelations = true)
     {
         $labels = parent::fieldLabels(true);
-        $labels['Number'] = _t('TreeSpecimen.Number', 'Number');
-        $labels['SpeciesTitle'] = _t('TreeSpecimen.SpeciesTitle', 'SpeciesTitle');
+        $labels['Number'] = _t('TreeSpecimen.Number', '#');
+        $labels['SpeciesTitle'] = _t('TreeSpecimen.SpeciesTitle', 'Species');
         $labels['Comment'] = _t('TreeSpecimen.Comment', 'Comment');
         $labels['SpeciesID'] = _t('BotanicalMapping.Species', 'Species');
         $labels['LastRecordedTotalHeight'] = _t('TreeSpecimen.LastRecordedTotalHeight', 'LastRecordedTotalHeight');

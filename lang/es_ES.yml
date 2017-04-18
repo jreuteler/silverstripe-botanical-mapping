@@ -23,7 +23,7 @@ es_ES:
    ShowOnMap: 'Mostrar todos los especímenes del informe en el mapa'
 
   TreeSpecimen:
-   Number: 'Número'
+   Number: '#'
    Species: 'Tipo'
    SpeciesTitle: 'Tipo'
    LastRecordedTotalHeight: 'Ultima altura conocida'

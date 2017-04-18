@@ -22,7 +22,7 @@ de_DE:
    ShowOnMap: 'Alle Exemplare dieses Gutachten auf Karte anzeigen'
 
   TreeSpecimen:
-   Number: 'Nummer'
+   Number: '#'
    Species: 'Typ'
    SpeciesTitle: 'Typ'
    LastRecordedTotalHeight: 'Letzte bekannte Höhe'
