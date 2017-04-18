@@ -110,10 +110,6 @@ class BotanicalMappingController extends Page_Controller
 
     public function save($data, Form $form, SS_HTTPRequest $request)
     {
-        if (isset($data['ID'])) {
-            $this->dataObject->ID = $data['ID'];
-        }
-
         $form->saveInto($this->dataObject);
         $this->dataObject->write();
 
