@@ -38,6 +38,10 @@ form.botanical-mapping.ss-gridfield-editable td.col-Key input.text {
     max-width: 80px !important;
 }
 
+form.botanical-mapping .ss-gridfield-table td.col-buttons .ss-gridfield-delete-inline {
+    display: none;
+}
+
 .float-none {
     float: none !important;
 }
