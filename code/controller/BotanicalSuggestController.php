@@ -9,7 +9,7 @@ class BotanicalSuggestController extends Page_Controller
     );
 
     private static $url_handlers = array(
-        '$DataObjectName/$FieldList' => 'suggestData',
+        '$DataObjectName/$FieldList/$ParentField/$ParentID' => 'suggestData',
     );
 
     public static $controllerPath = 'botanical-suggest';
@@ -25,7 +25,10 @@ class BotanicalSuggestController extends Page_Controller
     {
         $dataObjectName = $request->param('DataObjectName');
         $fieldList = $request->param('FieldList');
+        $parentField = $request->param('ParentField');
+        $parentID = $request->param('ParentID');
 
+        $fieldList = str_replace('-', '.', $fieldList); // convert - to .
         $fieldNames = explode(',', $fieldList);
         $data = array();
 
@@ -34,6 +37,10 @@ class BotanicalSuggestController extends Page_Controller
 
             $filter = $this->createFilterArray($fieldNames, $request->getVar('term'), 'PartialMatch');
             $results = $dataObjectName::get()->filterAny($filter);
+
+            if($parentField && $parentID) {
+                $results = $results->filter(array($parentField => $parentID));
+            }
 
             foreach ($results as $result) {
 
