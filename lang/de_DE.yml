@@ -6,11 +6,15 @@ de_DE:
    Surveys: 'Gutachten'
    Species: 'Spezies'
    SpeciesPl: 'Spezies'
+   StatusReport: 'Statusbericht'
+   StatusReportPl: 'Statusberichte'
    Specimen: 'Exemplar'
    Specimens: 'Exemplare'
    Save: 'Speichern'
    Language: 'Sprache'
    SetLanguage: 'Wechseln'
+   SearchSpecimen: 'Suchen'
+   Comment: 'Kommentar'
 
   BotanicalMappingProject:
    Title: 'Titel'
@@ -20,6 +24,8 @@ de_DE:
    Title: 'Titel'
    SpecimenCount: 'Anzahl'
    ShowOnMap: 'Alle Exemplare dieses Gutachten auf Karte anzeigen'
+   SearchSpecimen: 'Nach Exemplar in diesem Gutachten suchen und auf Editierenseite springen'
+   SpecimenList: 'Liste'
 
   TreeSpecimen:
    Number: '#'

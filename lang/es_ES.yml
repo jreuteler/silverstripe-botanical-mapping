@@ -6,11 +6,15 @@ es_ES:
    Surveys: 'Informes'
    Species: 'Especie'
    SpeciesPl: 'Especies'
+   StatusReport: 'Registro de estudio'
+   StatusReportPl: 'Registros de estudio'
    Specimen: 'Espécimen'
    Specimens: 'Especímenes'
    Save: 'Guardar'
    Language: 'Idioma'
    SetLanguage: 'Cambiar'
+   SearchSpecimen: 'Buscar'
+   Comment: 'Comentario'
 
 
   BotanicalMappingProject:
@@ -21,6 +25,8 @@ es_ES:
    Title: 'Título'
    SpecimenCount: 'Numéro de especímenes'
    ShowOnMap: 'Mostrar todos los especímenes del informe en el mapa'
+   SearchSpecimen: 'Buscar espécimen de este informe para editarlo'
+   SpecimenList: 'Lista'
 
   TreeSpecimen:
    Number: '#'
