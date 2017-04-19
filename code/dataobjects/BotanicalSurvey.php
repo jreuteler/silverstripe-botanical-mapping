@@ -56,14 +56,25 @@ class BotanicalSurvey extends DataObject
     {
         $fields = parent::getFrontEndFields($params);
 
+        $fields->removeByName('ProjectID');
+
         $fields->add(LabelField::create(_t('BotanicalMapping.Specimens', 'Specimens'))->addExtraClass('left'));
         $fields->add(LiteralField::create('Show on map', '<a class="btn float-none" href="' . BotanicalMappingController::$controllerPath . '/' . $this->ClassName . '/map/' . $this->ID . '">' . _t('BotanicalSurvey.ShowOnMap', 'Show all specimens of this survey on map') . '</a>'));
+
+
+        $autocomplete = AutoCompleteField::create('TreeSpecimen|ID', _t('BotanicalMapping.SearchSpecimen', 'Search'), '', null, null, 'TreeSpecimen', array('Number', 'Comment', 'Species'));
+        $autocomplete->setSuggestURL(BotanicalSuggestController::$controllerPath . '/TreeSpecimen/Number,Comment,Species-CommonName,Species-ScientificName/SurveyID/'.$this->ID);
+        $autocomplete->addExtraClass('autocomplete-edit');
+        $autocomplete->setDescription( _t('BotanicalSurvey.SearchSpecimen', 'Search for specimen in this survey and jump to the edit page'));
+
+        $fields->add($autocomplete);
+        $fields->add(LabelField::create(_t('BotanicalSurvey.SpecimenList', 'List'))->addExtraClass('left'));
 
         $config = GridFieldConfig::create();
         $config->addComponent(new GridFieldButtonRow('before'));
         $gridField = new GridField(
             'SpecimensID',
-            'Specimens',
+            _t('BotanicalMapping.Specimens', 'Specimens'),
             $this->Specimens(),
             GridFieldConfig::create()
                 ->addComponent(new GridFieldButtonRow('before'))
