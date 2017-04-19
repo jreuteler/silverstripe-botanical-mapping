@@ -5,6 +5,7 @@ class BotanicalMappingProject extends DataObject
 
     public static $db = array(
         'Title' => 'Varchar',
+        'Comment' => 'Text',
     );
 
     private static $indexes = array(
